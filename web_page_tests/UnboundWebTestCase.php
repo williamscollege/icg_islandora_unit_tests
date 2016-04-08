@@ -30,6 +30,8 @@ class UnboundWebTestCase extends WMSWebTestCase {
         $this->assertResponse(200);
         $this->assertNoPattern('/ERROR/i');
         $this->assertNoPattern('/FAIL/i');
+        $this->assertNoText('Warning:');
+        $this->assertNoText('Notice:');
         if ($this->reporter->reporter->reporter->getFailCount() > $initialFailCount) {
             echo "<b style=\"color:#00a;\">standard reponse check failures for ".$this->getUrl()."</b><br/><br/>\n";
         }

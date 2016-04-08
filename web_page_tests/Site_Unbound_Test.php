@@ -55,9 +55,8 @@ class Site_Unbound_Test extends UnboundWebTestCase {
         }
     }
 /*
-Audio - http://unbound-dev.williams.edu/islandora/object/daviscenter%3A80
+x-Audio - http://unbound-dev.williams.edu/islandora/object/daviscenter%3A80
 x-Basic Image - http://unbound-dev.williams.edu/islandora/object/daviscenter%3A89
-Collection - http://unbound-dev.williams.edu/islandora/object/ir%3AcitationCollection
 Compound -
 Book -
 x-Large Image - http://unbound-dev.williams.edu/islandora/object/motul%3A375
@@ -68,6 +67,7 @@ Video - http://unbound-dev.williams.edu/islandora/object/andyjaffe%3A42
         $test_url = 'http://'.TARGET_HOST.'/islandora/object/daviscenter%3A80';
         echo "audio test case - <a href=\"$test_url\">$test_url</a><br/>\n";
         $this->get($test_url);
+        $this->standardResponseChecks();
 
         $this->assertPattern('/<div class="islandora-audio-content">/');
         $this->assertPattern('/<a href="http:\\/\\/unbound-dev.williams.edu\\/islandora\\/object\\/daviscenter\\%3A80\\/datastream\\/PROXY_MP3"><img typeof="foaf:Image" src="\\/islandora\\/object\\/daviscenter\\%3A80\\/datastream\\/TN\\/view"/');
@@ -77,6 +77,7 @@ Video - http://unbound-dev.williams.edu/islandora/object/andyjaffe%3A42
         $test_url = 'http://'.TARGET_HOST.'/islandora/object/daviscenter%3A89';
         echo "basic_image test case - <a href=\"$test_url\">$test_url</a><br/>\n";
         $this->get($test_url);
+        $this->standardResponseChecks();
 
         $this->assertPattern('/<div class="islandora-basic-image-content">/');
         $this->assertPattern('/src="\\/islandora\\/object\\/daviscenter\\%3A89\\/datastream\\/MEDIUM_SIZE\\/view"/');
@@ -86,6 +87,7 @@ Video - http://unbound-dev.williams.edu/islandora/object/andyjaffe%3A42
         $test_url = 'http://'.TARGET_HOST.'/islandora/object/motul%3A375';
         echo "large_image test case - <a href=\"$test_url\">$test_url</a><br/>\n";
         $this->get($test_url);
+        $this->standardResponseChecks();
 
         $this->assertPattern('/<div class="islandora-large-image-content">/');
         $this->assertPattern('/id="islandora-openseadragon"/');
@@ -96,11 +98,21 @@ Video - http://unbound-dev.williams.edu/islandora/object/andyjaffe%3A42
         $test_url = 'http://'.TARGET_HOST.'/islandora/object/facultyarticles%3A139';
         echo "PDF test case - <a href=\"$test_url\">$test_url</a><br/>\n";
         $this->get($test_url);
+        $this->standardResponseChecks();
 
         $this->assertPattern('/<div class="islandora-pdf-content">/');
         $this->assertPattern('/src="http:\\/\\/'.TARGET_HOST.'\\/sites\\/all\\/libraries\\/pdfjs\\/web\\/viewer.html\\?file=\\/islandora\\/object\\/facultyarticles\\%253A139\\/datastream\\/OBJ\\/view"/');
     }
 
+    function TestContentModelDisplay_Video() {
+        $test_url = 'http://'.TARGET_HOST.'/islandora/object/andyjaffe%3A42';
+        echo "Video test case - <a href=\"$test_url\">$test_url</a><br/>\n";
+        $this->get($test_url);
+        $this->standardResponseChecks();
+
+//        $this->assertPattern('/<div class="islandora-pdf-content">/');
+//        $this->assertPattern('/src="http:\\/\\/'.TARGET_HOST.'\\/sites\\/all\\/libraries\\/pdfjs\\/web\\/viewer.html\\?file=\\/islandora\\/object\\/facultyarticles\\%253A139\\/datastream\\/OBJ\\/view"/');
+    }
 
 
 }
