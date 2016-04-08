@@ -30,6 +30,18 @@ class SiteWilliamsArchivesTest extends UnboundWebTestCase {
 
     //--------------------
 
+    function TestContentModelDisplay_Audio() {
+        $test_url = 'http://'.TARGET_HOST.'/williamsarchives/islandora/object/daviscenter%3A80';
+        echo "audio test case - <a href=\"$test_url\">$test_url</a><br/>\n";
+        $this->get($test_url);
+        $this->standardResponseChecks();
+
+        $this->assertPattern('/<div class="islandora-audio-content">/');
+        $this->assertPattern('/<div id="mediaplayer">Loading JW Player...<\\/div>/');
+    }
+
+    //--------------------
+
     function Test_Collection_daviscenter_posters() {
         $this->get('http://'.TARGET_HOST.'/williamsarchives/islandora/object/daviscenter%3Aposters');
         $this->standardResponseChecks();

@@ -70,7 +70,7 @@ Video - http://unbound-dev.williams.edu/islandora/object/andyjaffe%3A42
         $this->standardResponseChecks();
 
         $this->assertPattern('/<div class="islandora-audio-content">/');
-        $this->assertPattern('/<a href="http:\\/\\/unbound-dev.williams.edu\\/islandora\\/object\\/daviscenter\\%3A80\\/datastream\\/PROXY_MP3"><img typeof="foaf:Image" src="\\/islandora\\/object\\/daviscenter\\%3A80\\/datastream\\/TN\\/view"/');
+        $this->assertPattern('/<a href="http:\\/\\/'.TARGET_HOST.'\\/islandora\\/object\\/daviscenter\\%3A80\\/datastream\\/PROXY_MP3"><img typeof="foaf:Image" src="\\/islandora\\/object\\/daviscenter\\%3A80\\/datastream\\/TN\\/view"/');
     }
 
     function TestContentModelDisplay_BasicImage() {
