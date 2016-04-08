@@ -83,6 +83,14 @@ Video - http://unbound-dev.williams.edu/islandora/object/andyjaffe%3A42
         $this->assertPattern('/src="\\/islandora\\/object\\/daviscenter\\%3A89\\/datastream\\/MEDIUM_SIZE\\/view"/');
     }
 
+    function TestContentModelDisplay_Compound(){
+        echo "compound test case - NOT USED ON THIS SITE<br/>\n";
+    }
+
+    function TestContentModelDisplay_Book(){
+        echo "book test case - NOT USED ON THIS SITE<br/>\n";
+    }
+
     function TestContentModelDisplay_LargeImage(){
         $test_url = 'http://'.TARGET_HOST.'/islandora/object/motul%3A375';
         echo "large_image test case - <a href=\"$test_url\">$test_url</a><br/>\n";

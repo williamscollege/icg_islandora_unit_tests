@@ -40,6 +40,51 @@ class SiteWilliamsArchivesTest extends UnboundWebTestCase {
         $this->assertPattern('/<div id="mediaplayer">Loading JW Player...<\\/div>/');
     }
 
+    function TestContentModelDisplay_BasicImage() {
+        $test_url = 'http://'.TARGET_HOST.'/williamsarchives/islandora/object/daviscenter%3A89';
+        echo "basic_image test case - <a href=\"$test_url\">$test_url</a><br/>\n";
+        $this->get($test_url);
+        $this->standardResponseChecks();
+
+        $this->assertPattern('/<div class="islandora-basic-image-content">/');
+        $this->assertPattern('/src="\\/williamsarchives\\/islandora\\/object\\/daviscenter\\%3A89\\/datastream\\/MEDIUM_SIZE\\/view"/');
+    }
+
+    function TestContentModelDisplay_Book() {
+        $test_url = 'http://'.TARGET_HOST.'/williamsarchives/islandora/object/gulielmensian%3A2228#page/1/mode/1up';
+        echo "basic_image test case - <a href=\"$test_url\">$test_url</a><br/>\n";
+        $this->get($test_url);
+        $this->standardResponseChecks();
+
+        $this->assertPattern('/"islandoraInternetArchiveBookReader":\\{"book":"gulielmensian:2228"/');
+        $this->assertPattern('/<div id="book-viewer">/');
+        $this->assertPattern('/<div id="BookReader" class="islandora-internet-archive-bookreader">/');
+    }
+
+    function TestContentModelDisplay_LargeImage(){
+        echo "large_image test case - NOT USED ON THIS SITE<br/>\n";
+    }
+
+    function TestContentModelDisplay_PDF() {
+        $test_url = 'http://'.TARGET_HOST.'/williamsarchives/islandora/object/dwight%3A88';
+        echo "PDF test case - <a href=\"$test_url\">$test_url</a><br/>\n";
+        $this->get($test_url);
+        $this->standardResponseChecks();
+
+        $this->assertPattern('/<div class="islandora-pdf-content">/');
+        $this->assertPattern('/src="http:\\/\\/'.TARGET_HOST.'\\/williamsarchives\\/sites\\/all\\/libraries\\/pdfjs\\/web\\/viewer.html\\?file=\\/islandora\\/object\\/dwight\\%253A88\\/datastream\\/OBJ\\/view"/');
+    }
+
+    function TestContentModelDisplay_Video() {
+        $test_url = 'http://'.TARGET_HOST.'/williamsarchives/islandora/object/andyjaffe%3A42';
+        echo "Video test case - <a href=\"$test_url\">$test_url</a><br/>\n";
+        $this->get($test_url);
+        $this->standardResponseChecks();
+
+        $this->assertPattern('/<div class="islandora-video-content">/');
+        $this->assertPattern('/<div id="mediaplayer">Loading JW Player...<\\/div>/');
+    }
+
     //--------------------
 
     function Test_Collection_daviscenter_posters() {
