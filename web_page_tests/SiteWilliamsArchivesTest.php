@@ -5,10 +5,14 @@ require_once('UnboundWebTestCase.php');
 
 class SiteWilliamsArchivesTest extends UnboundWebTestCase {
 
+    function SiteWilliamsArchivesTest() {
+        $this->setUnboundSite('williamsarchives');
+        echo "\n<br/><br/>\n<b>TESTING SITE ".$this->getTestingUrlBase()."</b><br/>\n";
+    }
+
     //############################################################
 
     function TestSiteBasics() {
-        $this->setUnboundSite('williamsarchives');
         $this->doStandardBasicSiteTests();
     }
 

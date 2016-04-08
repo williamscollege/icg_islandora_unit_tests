@@ -5,29 +5,33 @@ require_once('UnboundWebTestCase.php');
 
 class Site_Unbound_Test extends UnboundWebTestCase {
 
+    function Site_Unbound_Test() {
+        $this->setUnboundSite('');
+        echo "\n<br/><br/>\n<b>TESTING SITE ".$this->getTestingUrlBase()."</b><br/>\n";
+    }
+
     //############################################################
 
-    function x_TestSiteBasics() {
-        $this->setUnboundSite('');
+    function TestSiteBasics() {
         $this->doStandardBasicSiteTests();
     }
 
-    function x_TestProjectLeads() {
+    function TestProjectLeads() {
         $this->get('http://'.TARGET_HOST.'/project-leads');
         $this->standardResponseChecks();
     }
 
-    function x_TestStartAProject() {
+    function TestStartAProject() {
         $this->get('http://'.TARGET_HOST.'/start-a-project');
         $this->standardResponseChecks();
     }
 
-    function x_TestSearch_Type() {
+    function TestSearch_Type() {
         $this->get('http://'.TARGET_HOST.'/islandora/search?f[0]=dc.type%3A%22Physical%5C%20Object%22');
         $this->standardResponseChecks();
     }
 
-    function x_TestCollectionAccessibility() {
+    function TestCollectionAccessibility() {
 
         echo '<p>TODO: add the full list of collections to check for on the main site http://'.TARGET_HOST."</p>\n";
 

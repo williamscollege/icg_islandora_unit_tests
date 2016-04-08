@@ -5,10 +5,14 @@ require_once('UnboundWebTestCase.php');
 
 class SiteRonadhCoxTest extends UnboundWebTestCase {
 
+    function SiteRonadhCoxTest() {
+        $this->setUnboundSite('ronadhcox');
+        echo "\n<br/><br/>\n<b>TESTING SITE ".$this->getTestingUrlBase()."</b><br/>\n";
+    }
+
     //############################################################
 
     function TestSiteBasics() {
-        $this->setUnboundSite('ronadhcox');
         $this->doStandardBasicSiteTests();
     }
 

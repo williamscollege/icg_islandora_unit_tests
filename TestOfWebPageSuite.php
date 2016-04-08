@@ -10,7 +10,9 @@ class TestOfWebSuite extends TestSuite {
         $this->TestSuite('Unbound Site Tests');
         echo "running against ".TARGET_HOST."<br/><br/>\n";
 
+        #######################################################
         # Tests: public access to the various unbound sites
+
         $this->addFile('web_page_tests/Site_Unbound_Test.php');
 
 //        $this->addFile('web_page_tests/SiteFacultyPublicationsTest.php');
@@ -21,9 +23,11 @@ class TestOfWebSuite extends TestSuite {
 //
 //        $this->addFile('web_page_tests/SiteWilliamsArchivesTest.php');
 
-//        $this->addFile('web_page_tests/BasicSecurityTest.php');
+//--------------------------------------------------------------
 
-//            $this->addFile('web_page_tests/SiteTest.php');
+////        $this->addFile('web_page_tests/BasicSecurityTest.php');
+
+////            $this->addFile('web_page_tests/SiteTest.php');
 
         # Sound Effect
         $this->addFile('soundForTesting.php');

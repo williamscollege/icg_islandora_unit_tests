@@ -5,10 +5,14 @@ require_once('UnboundWebTestCase.php');
 
 class SiteMayaMotulDeSanJoseArchaeologyTest extends UnboundWebTestCase {
 
+    function SiteMayaMotulDeSanJoseArchaeologyTest() {
+        $this->setUnboundSite('mayamotuldesanjosearchaeology');
+        echo "\n<br/><br/>\n<b>TESTING SITE ".$this->getTestingUrlBase()."</b><br/>\n";
+    }
+
     //############################################################
 
     function TestSiteBasics() {
-        $this->setUnboundSite('mayamotuldesanjosearchaeology');
         $this->doStandardBasicSiteTests();
     }
 
