@@ -29,7 +29,7 @@ class UnboundWebTestCase extends WMSWebTestCase {
         $initialFailCount = $this->reporter->reporter->reporter->getFailCount();
         $this->assertResponse(200);
         $this->assertNoPattern('/ERROR/i');
-        $this->assertNoPattern('/FAIL/i');
+        $this->assertNoPattern('/FAIL[^s]/i');
         $this->assertNoText('Warning:');
         $this->assertNoText('Notice:');
         if ($this->reporter->reporter->reporter->getFailCount() > $initialFailCount) {

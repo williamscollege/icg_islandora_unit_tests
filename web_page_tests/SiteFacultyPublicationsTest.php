@@ -24,7 +24,7 @@ class SiteFacultyPublicationsTest extends UnboundWebTestCase {
     }
 
     function TestObjectDisplayMetadataLabels() {
-        $this->get('http://'.TARGET_HOST.'/facultypublications/islandora/object/facultyarticles%3A159');
+        $this->get('http://'.TARGET_HOST.'/facultypublications/islandora/object/facultyarticles%3A139');
         $this->standardResponseChecks();
 
         $this->assertPattern('/AUTHOR/i');
