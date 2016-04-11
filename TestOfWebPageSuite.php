@@ -23,6 +23,8 @@ class TestOfWebSuite extends TestSuite {
 
         $this->addFile('web_page_tests/SiteWilliamsArchivesTest.php');
 
+        $this->addFile('web_page_tests/SiteHenryArtCollectionsTest.php');
+
 //--------------------------------------------------------------
 
 ////        $this->addFile('web_page_tests/BasicSecurityTest.php');
