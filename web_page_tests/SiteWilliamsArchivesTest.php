@@ -52,13 +52,17 @@ class SiteWilliamsArchivesTest extends UnboundWebTestCase {
 
     function TestContentModelDisplay_Book() {
         $test_url = 'http://'.TARGET_HOST.'/williamsarchives/islandora/object/gulielmensian%3A2228#page/1/mode/1up';
-        echo "basic_image test case - <a href=\"$test_url\">$test_url</a><br/>\n";
+        echo "book test case - <a href=\"$test_url\">$test_url</a><br/>\n";
         $this->get($test_url);
         $this->standardResponseChecks();
 
         $this->assertPattern('/"islandoraInternetArchiveBookReader":\\{"book":"gulielmensian:2228"/');
         $this->assertPattern('/<div id="book-viewer">/');
         $this->assertPattern('/<div id="BookReader" class="islandora-internet-archive-bookreader">/');
+    }
+
+    function TestContentModelDisplay_Compound(){
+        echo "compound test case - NOT USED ON THIS SITE<br/>\n";
     }
 
     function TestContentModelDisplay_LargeImage(){
@@ -72,7 +76,9 @@ class SiteWilliamsArchivesTest extends UnboundWebTestCase {
         $this->standardResponseChecks();
 
         $this->assertPattern('/<div class="islandora-pdf-content">/');
-        $this->assertPattern('/src="http:\\/\\/'.TARGET_HOST.'\\/williamsarchives\\/sites\\/all\\/libraries\\/pdfjs\\/web\\/viewer.html\\?file=\\/islandora\\/object\\/dwight\\%253A88\\/datastream\\/OBJ\\/view"/');
+        $this->assertPattern('/<iframe class="pdf"/');
+        $this->assertPattern('/src="http:\\/\\/unbound-dev.williams.edu\\/williamsarchives\\/sites\\/all\\/libraries\\/pdfjs\\/web\\/viewer.html\\?file=\\/williamsarchives\\/islandora\\/object\\/dwight\\%253A88\\/datastream\\/OBJ\\/view"/');
+//        echo $this->getBrowser()->getContent();
     }
 
     function TestContentModelDisplay_Video() {
@@ -81,6 +87,7 @@ class SiteWilliamsArchivesTest extends UnboundWebTestCase {
         $this->get($test_url);
         $this->standardResponseChecks();
 
+        $this->assertPattern('/"islandora_jwplayer":{"thumbnail":"http:\\\\\/\\\\\/'.TARGET_HOST.'\\\\\/williamsarchives\\\\\/islandora\\\\\/object\\\\\/andyjaffe\\%3A42\\\\\/datastream\\\\\/TN\\\\\/view","file":"\\\\\/williamsarchives\\\\\/islandora\\\\\/object\\\\\/andyjaffe\\%3A42\\\\\/datastream\\\\\/MP4\\\\\/view\\\\\/file_name_spoof.mp4"/');
         $this->assertPattern('/<div class="islandora-video-content">/');
         $this->assertPattern('/<div id="mediaplayer">Loading JW Player...<\\/div>/');
     }

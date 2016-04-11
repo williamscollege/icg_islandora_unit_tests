@@ -13,7 +13,7 @@ class TestOfWebSuite extends TestSuite {
         #######################################################
         # Tests: public access to the various unbound sites
 
-//        $this->addFile('web_page_tests/Site_Unbound_Test.php');
+        $this->addFile('web_page_tests/Site_Unbound_Test.php');
 //
 //        $this->addFile('web_page_tests/SiteFacultyPublicationsTest.php');
 //

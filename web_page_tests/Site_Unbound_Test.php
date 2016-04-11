@@ -118,9 +118,9 @@ Video - http://unbound-dev.williams.edu/islandora/object/andyjaffe%3A42
         $this->get($test_url);
         $this->standardResponseChecks();
 
-//        $this->assertPattern('/<div class="islandora-pdf-content">/');
-//        $this->assertPattern('/src="http:\\/\\/'.TARGET_HOST.'\\/sites\\/all\\/libraries\\/pdfjs\\/web\\/viewer.html\\?file=\\/islandora\\/object\\/facultyarticles\\%253A139\\/datastream\\/OBJ\\/view"/');
+        $this->assertPattern('/"islandora_jwplayer":{"thumbnail":"http:\\\\\/\\\\\/'.TARGET_HOST.'\\\\\/islandora\\\\\/object\\\\\/andyjaffe\\%3A42\\\\\/datastream\\\\\/TN\\\\\/view","file":"\\\\\/islandora\\\\\/object\\\\\/andyjaffe\\%3A42\\\\\/datastream\\\\\/MP4\\\\\/view\\\\\/file_name_spoof.mp4"/');
+        $this->assertPattern('/<div class="islandora-video-content">/');
+        $this->assertPattern('/<div id="mediaplayer">Loading JW Player...<\\/div>/');
     }
-
 
 }
