@@ -77,7 +77,7 @@ class SiteWilliamsArchivesTest extends UnboundWebTestCase {
 
         $this->assertPattern('/<div class="islandora-pdf-content">/');
         $this->assertPattern('/<iframe class="pdf"/');
-        $this->assertPattern('/src="http:\\/\\/unbound-dev.williams.edu\\/williamsarchives\\/sites\\/all\\/libraries\\/pdfjs\\/web\\/viewer.html\\?file=\\/williamsarchives\\/islandora\\/object\\/dwight\\%253A88\\/datastream\\/OBJ\\/view"/');
+        $this->assertPattern('/src="http:\\/\\/'.TARGET_HOST.'\\/williamsarchives\\/sites\\/all\\/libraries\\/pdfjs\\/web\\/viewer.html\\?file=\\/williamsarchives\\/islandora\\/object\\/dwight\\%253A88\\/datastream\\/OBJ\\/view"/');
 //        echo $this->getBrowser()->getContent();
     }
 
