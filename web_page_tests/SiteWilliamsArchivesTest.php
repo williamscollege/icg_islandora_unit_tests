@@ -31,23 +31,24 @@ class SiteWilliamsArchivesTest extends UnboundWebTestCase {
     //--------------------
 
     function TestContentModelDisplay_Audio() {
-        $test_url = 'http://'.TARGET_HOST.'/williamsarchives/islandora/object/daviscenter%3A80';
+        $test_url = 'http://'.TARGET_HOST.'/williamsarchives/islandora/object/andyjaffe%3A55';
         echo "audio test case - <a href=\"$test_url\">$test_url</a><br/>\n";
         $this->get($test_url);
         $this->standardResponseChecks();
 
         $this->assertPattern('/<div class="islandora-audio-content">/');
+        $this->assertPattern('/"file":"http:\\\\\/\\\\\/'.TARGET_HOST.'\\\\\/williamsarchives\\\\\/islandora\\\\\/object\\\\\/andyjaffe%3A55\\\\\/datastream\\\\\/PROXY_MP3\\\\\/file_name_spoof.mp3"/');
         $this->assertPattern('/<div id="mediaplayer">Loading JW Player...<\\/div>/');
     }
 
     function TestContentModelDisplay_BasicImage() {
-        $test_url = 'http://'.TARGET_HOST.'/williamsarchives/islandora/object/daviscenter%3A89';
+        $test_url = 'http://'.TARGET_HOST.'/williamsarchives/islandora/object/daviscenter%3A60';
         echo "basic_image test case - <a href=\"$test_url\">$test_url</a><br/>\n";
         $this->get($test_url);
         $this->standardResponseChecks();
 
         $this->assertPattern('/<div class="islandora-basic-image-content">/');
-        $this->assertPattern('/src="\\/williamsarchives\\/islandora\\/object\\/daviscenter\\%3A89\\/datastream\\/MEDIUM_SIZE\\/view"/');
+        $this->assertPattern('/src="\\/williamsarchives\\/islandora\\/object\\/daviscenter\\%3A60\\/datastream\\/MEDIUM_SIZE\\/view"/');
     }
 
     function TestContentModelDisplay_Book() {
@@ -77,7 +78,7 @@ class SiteWilliamsArchivesTest extends UnboundWebTestCase {
 
         $this->assertPattern('/<div class="islandora-pdf-content">/');
         $this->assertPattern('/<iframe class="pdf"/');
-        $this->assertPattern('/src="http:\\/\\/'.TARGET_HOST.'\\/williamsarchives\\/sites\\/all\\/libraries\\/pdfjs\\/web\\/viewer.html\\?file=\\/williamsarchives\\/islandora\\/object\\/dwight\\%253A88\\/datastream\\/OBJ\\/view"/');
+        $this->assertPattern('/src="http:\\/\\/'.TARGET_HOST.'\\/williamsarchives\\/sites\\/all\\/libraries\\/pdfjs\\/web\\/viewer.html\\?file=(http%3A\\/\\/'.TARGET_HOST.'\\/|\\/)williamsarchives\\/islandora\\/object\\/dwight\\%253A88\\/datastream\\/OBJ\\/view"/');
 //        echo $this->getBrowser()->getContent();
     }
 
@@ -125,7 +126,7 @@ class SiteWilliamsArchivesTest extends UnboundWebTestCase {
 
 
     function Test_Collection_communications() {
-        $this->get('http://'.TARGET_HOST.'/williamsarchives/islandora/object/communications%3Acommencement-images');
+        $this->get('http://'.TARGET_HOST.'/williamsarchives/islandora/object/commencementcollection%3Aimages');
         $this->standardResponseChecks();
     }
     function Test_Object_communications() {

@@ -46,7 +46,7 @@ class SiteFacultyPublicationsTest extends UnboundWebTestCase {
 
         $this->assertPattern('/<div class="islandora-pdf-content">/');
         $this->assertPattern('/<iframe class="pdf"/');
-        $this->assertPattern('/src="http:\\/\\/'.TARGET_HOST.'\\/facultypublications\\/sites\\/all\\/libraries\\/pdfjs\\/web\\/viewer.html\\?file=\\/facultypublications\\/islandora\\/object\\/facultyarticles\\%253A135\\/datastream\\/OBJ\\/view"/');
+        $this->assertPattern('/src="http:\\/\\/'.TARGET_HOST.'\\/facultypublications\\/sites\\/all\\/libraries\\/pdfjs\\/web\\/viewer.html\\?file=(http%3A\\/\\/'.TARGET_HOST.'\\/|\\/)facultypublications\\/islandora\\/object\\/facultyarticles\\%253A135\\/datastream\\/OBJ\\/view"/');
     }
 
     function TestContentModelDisplay_Video() {

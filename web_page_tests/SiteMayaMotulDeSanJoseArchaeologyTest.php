@@ -53,7 +53,7 @@ class SiteMayaMotulDeSanJoseArchaeologyTest extends UnboundWebTestCase {
 
         $this->assertPattern('/<div class="islandora-pdf-content">/');
         $this->assertPattern('/<iframe class="pdf"/');
-        $this->assertPattern('/src="http:\\/\\/'.TARGET_HOST.'\\/mayamotuldesanjosearchaeology\\/sites\\/all\\/libraries\\/pdfjs\\/web\\/viewer.html\\?file=\\/mayamotuldesanjosearchaeology\\/islandora\\/object\\/motul\\%253A519\\/datastream\\/OBJ\\/view"/');
+        $this->assertPattern('/src="http:\\/\\/'.TARGET_HOST.'\\/mayamotuldesanjosearchaeology\\/sites\\/all\\/libraries\\/pdfjs\\/web\\/viewer.html\\?file=(http%3A\\/\\/'.TARGET_HOST.'\\/|\\/)mayamotuldesanjosearchaeology\\/islandora\\/object\\/motul\\%253A519\\/datastream\\/OBJ\\/view"/');
     }
 
     function TestContentModelDisplay_Video() {
