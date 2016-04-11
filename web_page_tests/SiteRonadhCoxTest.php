@@ -18,6 +18,42 @@ class SiteRonadhCoxTest extends UnboundWebTestCase {
 
     //############################################################
 
+    function TestContentModelDisplay_Audio() {
+        echo "audio test case - NOT USED ON THIS SITE<br/>\n";
+    }
+
+    function TestContentModelDisplay_BasicImage(){
+        $test_url = 'http://'.TARGET_HOST.'/ronadhcox/islandora/object/lavaka%3A920';
+        echo "basic_image test case - <a href=\"$test_url\">$test_url</a><br/>\n";
+        $this->get($test_url);
+        $this->standardResponseChecks();
+
+        $this->assertPattern('/<div class="islandora-basic-image-content">/');
+        $this->assertPattern('/src="\\/ronadhcox\\/islandora\\/object\\/lavaka\\%3A920\\/datastream\\/MEDIUM_SIZE\\/view"/');
+    }
+
+    function TestContentModelDisplay_Book(){
+        echo "book test case - NOT USED ON THIS SITE<br/>\n";
+    }
+
+    function TestContentModelDisplay_Compound(){
+        echo "compound test case - NOT USED ON THIS SITE<br/>\n";
+    }
+
+    function TestContentModelDisplay_LargeImage(){
+        echo "large_image test case - NOT USED ON THIS SITE<br/>\n";
+    }
+
+    function TestContentModelDisplay_PDF() {
+        echo "PDF test case - NOT USED ON THIS SITE<br/>\n";
+    }
+
+    function TestContentModelDisplay_Video() {
+        echo "video test case - NOT USED ON THIS SITE<br/>\n";
+    }
+
+    //############################################################
+
     function TestProjectLeadPage() {
         $this->get('http://'.TARGET_HOST.'/ronadhcox/project-lead');
         $this->standardResponseChecks();
