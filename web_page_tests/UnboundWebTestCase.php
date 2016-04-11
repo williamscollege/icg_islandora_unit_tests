@@ -64,4 +64,43 @@ class UnboundWebTestCase extends WMSWebTestCase {
         $this->assertPattern('/islandora-solr-search-result-inner/'); // at least one result
     }
 
+    //############################################################
+
+    function _setUpTestValuesFor($site,$namespace,$id_number) {
+        $site_url_part = '';
+        $site_url_part_escaped = '';
+        if ($site) {
+            $site_url_part = '/'.$site;
+            $site_url_part_escaped = '\\\\/'.$site;
+        }
+        $test_url = 'http://'.TARGET_HOST.$site_url_part.'/islandora/object/'.$namespace.'%3A'.$id_number;
+
+        return [
+            'site_url_part' => $site_url_part,
+            'site_url_part_escaped' => $site_url_part_escaped,
+            'test_url' => $test_url
+        ];
+    }
+
+    function doContentModelTest_Audio($site,$namespace,$id_number) {
+        $tv = $this->_setUpTestValuesFor($site,$namespace,$id_number);
+
+        echo 'audio test case - <a href="'.$tv['test_url'].'">'.$tv['test_url']."</a><br/>\n";
+        $this->get($tv['test_url']);
+        $this->standardResponseChecks();
+
+        $this->assertPattern('/<div class="islandora-audio-content">/');
+        $this->assertPattern('/<a href="http:\\/\\/'.TARGET_HOST.$tv['site_url_part_escaped'].'\\/islandora\\/object\\/'.$namespace.'\\%3A'.$id_number.'\\/datastream\\/PROXY_MP3"><img typeof="foaf:Image" src="'.$tv['site_url_part_escaped'].'\\/islandora\\/object\\/'.$namespace.'\\%3A'.$id_number.'\\/datastream\\/TN\\/view"/');
+    }
+
+    function doContentModelTest_BasicImage($site,$namespace,$id_number) {
+        $tv = $this->_setUpTestValuesFor($site,$namespace,$id_number);
+
+        echo 'basic iamge test case - <a href="'.$tv['test_url'].'">'.$tv['test_url']."</a><br/>\n";
+        $this->get($tv['test_url']);
+        $this->standardResponseChecks();
+
+        $this->assertPattern('/<div class="islandora-basic-image-content">/');
+        $this->assertPattern('/src="'.$tv['site_url_part_escaped'].'\\/islandora\\/object\\/'.$namespace.'\\%3A'.$id_number.'\\/datastream\\/MEDIUM_SIZE\\/view"/');
+    }
 }

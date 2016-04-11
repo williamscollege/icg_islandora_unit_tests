@@ -64,23 +64,11 @@ x-PDF - http://unbound-dev.williams.edu/islandora/object/facultyarticles%3A139
 Video - http://unbound-dev.williams.edu/islandora/object/andyjaffe%3A42
 */
     function TestContentModelDisplay_Audio() {
-        $test_url = 'http://'.TARGET_HOST.'/islandora/object/andyjaffe%3A55';
-        echo "audio test case - <a href=\"$test_url\">$test_url</a><br/>\n";
-        $this->get($test_url);
-        $this->standardResponseChecks();
-
-        $this->assertPattern('/<div class="islandora-audio-content">/');
-        $this->assertPattern('/<a href="http:\\/\\/'.TARGET_HOST.'\\/islandora\\/object\\/andyjaffe\\%3A55\\/datastream\\/PROXY_MP3"><img typeof="foaf:Image" src="\\/islandora\\/object\\/andyjaffe\\%3A55\\/datastream\\/TN\\/view"/');
+        $this->doContentModelTest_Audio('','andyjaffe','55');
     }
 
     function TestContentModelDisplay_BasicImage() {
-        $test_url = 'http://'.TARGET_HOST.'/islandora/object/alexanderdavidson%3A205';
-        echo "basic_image test case - <a href=\"$test_url\">$test_url</a><br/>\n";
-        $this->get($test_url);
-        $this->standardResponseChecks();
-
-        $this->assertPattern('/<div class="islandora-basic-image-content">/');
-        $this->assertPattern('/src="\\/islandora\\/object\\/alexanderdavidson\\%3A205\\/datastream\\/MEDIUM_SIZE\\/view"/');
+        $this->doContentModelTest_BasicImage('','alexanderdavidson','205');
     }
 
     function TestContentModelDisplay_Compound(){
