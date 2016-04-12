@@ -82,7 +82,11 @@ class UnboundWebTestCase extends WMSWebTestCase {
         ];
     }
 
-    function doContentModelTest_Audio($site,$namespace,$id_number) {
+    function doContentModelTest_Audio($site='',$namespace='',$id_number='') {
+        if ($site=='' && $namespace=='' && $id_number=='') {
+            echo "audio test case - NOT USED ON THIS SITE<br/>\n";
+            return;
+        }
         $tv = $this->_setUpTestValuesFor($site,$namespace,$id_number);
 
         echo 'audio test case - <a href="'.$tv['test_url'].'">'.$tv['test_url']."</a><br/>\n";
@@ -94,13 +98,34 @@ class UnboundWebTestCase extends WMSWebTestCase {
     }
 
     function doContentModelTest_BasicImage($site,$namespace,$id_number) {
+        if ($site=='' && $namespace=='' && $id_number=='') {
+            echo "basic image test case - NOT USED ON THIS SITE<br/>\n";
+            return;
+        }
         $tv = $this->_setUpTestValuesFor($site,$namespace,$id_number);
 
-        echo 'basic iamge test case - <a href="'.$tv['test_url'].'">'.$tv['test_url']."</a><br/>\n";
+        echo 'basic image test case - <a href="'.$tv['test_url'].'">'.$tv['test_url']."</a><br/>\n";
         $this->get($tv['test_url']);
         $this->standardResponseChecks();
 
         $this->assertPattern('/<div class="islandora-basic-image-content">/');
         $this->assertPattern('/src="'.$tv['site_url_part_escaped'].'\\/islandora\\/object\\/'.$namespace.'\\%3A'.$id_number.'\\/datastream\\/MEDIUM_SIZE\\/view"/');
+    }
+
+    function doContentModelTest_Book($site,$namespace,$id_number) {
+        if ($site=='' && $namespace=='' && $id_number=='') {
+            echo "book test case - NOT USED ON THIS SITE<br/>\n";
+            return;
+        }
+        $tv = $this->_setUpTestValuesFor($site,$namespace,$id_number);
+        $tv['test_url'] .= '#page/1/mode/1up';
+
+        echo 'book test case - <a href="'.$tv['test_url'].'">'.$tv['test_url']."</a><br/>\n";
+        $this->get($tv['test_url']);
+        $this->standardResponseChecks();
+
+        $this->assertPattern('/"islandoraInternetArchiveBookReader":\\{"book":"'.$namespace.':'.$id_number.'"/');
+        $this->assertPattern('/<div id="book-viewer">/');
+        $this->assertPattern('/<div id="BookReader" class="islandora-internet-archive-bookreader">/');
     }
 }

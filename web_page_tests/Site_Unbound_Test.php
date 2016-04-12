@@ -71,13 +71,15 @@ Video - http://unbound-dev.williams.edu/islandora/object/andyjaffe%3A42
         $this->doContentModelTest_BasicImage('','alexanderdavidson','205');
     }
 
-    function TestContentModelDisplay_Compound(){
-        echo "compound test case - NOT USED ON THIS SITE<br/>\n";
-    }
 
     function TestContentModelDisplay_Book(){
         echo "book test case - NOT USED ON THIS SITE<br/>\n";
     }
+
+    function TestContentModelDisplay_Compound(){
+        echo "compound test case - NOT USED ON THIS SITE<br/>\n";
+    }
+
 
     function TestContentModelDisplay_LargeImage(){
         $test_url = 'http://'.TARGET_HOST.'/islandora/object/motul%3A375';
