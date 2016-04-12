@@ -54,15 +54,7 @@ class Site_Unbound_Test extends UnboundWebTestCase {
             }
         }
     }
-/*
-x-Audio - http://unbound-dev.williams.edu/islandora/object/daviscenter%3A80
-x-Basic Image - http://unbound-dev.williams.edu/islandora/object/daviscenter%3A89
-Compound -
-Book -
-x-Large Image - http://unbound-dev.williams.edu/islandora/object/motul%3A375
-x-PDF - http://unbound-dev.williams.edu/islandora/object/facultyarticles%3A139
-Video - http://unbound-dev.williams.edu/islandora/object/andyjaffe%3A42
-*/
+
     function TestContentModelDisplay_Audio() {
         $this->doContentModelTest_Audio('','andyjaffe','55');
     }
@@ -71,47 +63,24 @@ Video - http://unbound-dev.williams.edu/islandora/object/andyjaffe%3A42
         $this->doContentModelTest_BasicImage('','alexanderdavidson','205');
     }
 
-
     function TestContentModelDisplay_Book(){
-        echo "book test case - NOT USED ON THIS SITE<br/>\n";
+        $this->doContentModelTest_Book('','','');
     }
 
     function TestContentModelDisplay_Compound(){
-        echo "compound test case - NOT USED ON THIS SITE<br/>\n";
+        $this->doContentModelTest_Compound('','','');
     }
 
-
     function TestContentModelDisplay_LargeImage(){
-        $test_url = 'http://'.TARGET_HOST.'/islandora/object/motul%3A375';
-        echo "large_image test case - <a href=\"$test_url\">$test_url</a><br/>\n";
-        $this->get($test_url);
-        $this->standardResponseChecks();
-
-        $this->assertPattern('/<div class="islandora-large-image-content">/');
-        $this->assertPattern('/id="islandora-openseadragon"/');
-        $this->assertPattern('/\\{"pid":"motul:375","resourceUri":"http:\\\\\/\\\\\/'.TARGET_HOST.'\\\\\/islandora\\\\\/object\\\\\/motul\\%3A375\\\\\/datastream\\\\\/JP2/');
+        $this->doContentModelTest_LargeImage('','motul','375');
     }
 
     function TestContentModelDisplay_PDF() {
-        $test_url = 'http://'.TARGET_HOST.'/islandora/object/facultyarticles%3A135';
-        echo "PDF test case - <a href=\"$test_url\">$test_url</a><br/>\n";
-        $this->get($test_url);
-        $this->standardResponseChecks();
-
-        $this->assertPattern('/<div class="islandora-pdf-content">/');
-        $this->assertPattern('/<iframe class="pdf"/');
-        $this->assertPattern('/src="http:\\/\\/'.TARGET_HOST.'\\/sites\\/all\\/libraries\\/pdfjs\\/web\\/viewer.html\\?file=(http%3A\\/\\/'.TARGET_HOST.'\\/|\\/)islandora\\/object\\/facultyarticles\\%253A135\\/datastream\\/OBJ\\/view"/');
+        $this->doContentModelTest_PDF('','facultyarticles','135');
     }
 
     function TestContentModelDisplay_Video() {
-        $test_url = 'http://'.TARGET_HOST.'/islandora/object/andyjaffe%3A42';
-        echo "Video test case - <a href=\"$test_url\">$test_url</a><br/>\n";
-        $this->get($test_url);
-        $this->standardResponseChecks();
-
-        $this->assertPattern('/"islandora_jwplayer":{"thumbnail":"http:\\\\\/\\\\\/'.TARGET_HOST.'\\\\\/islandora\\\\\/object\\\\\/andyjaffe\\%3A42\\\\\/datastream\\\\\/TN\\\\\/view","file":"\\\\\/islandora\\\\\/object\\\\\/andyjaffe\\%3A42\\\\\/datastream\\\\\/MP4\\\\\/view\\\\\/file_name_spoof.mp4"/');
-        $this->assertPattern('/<div class="islandora-video-content">/');
-        $this->assertPattern('/<div id="mediaplayer">Loading JW Player...<\\/div>/');
+        $this->doContentModelTest_Video('','andyjaffe','42');
     }
 
 }
