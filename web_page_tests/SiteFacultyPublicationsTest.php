@@ -48,14 +48,24 @@ class SiteFacultyPublicationsTest extends UnboundWebTestCase {
 
     //############################################################
 
+    private $specificTestObjectUrl = '';
+
     function TestObject_Specific() {
-        $this->get('http://'.TARGET_HOST.'/facultypublications/islandora/object/facultyarticles%3A138');
+        $this->specificTestObjectUrl = 'http://'.TARGET_HOST.'/facultypublications/islandora/object/facultyarticles%3A138';
+        $this->get($this->specificTestObjectUrl);
         $this->standardResponseChecks();
     }
 
+    function TestObjectDisplayCollectionInfo() {
+        $this->get($this->specificTestObjectUrl);
+
+        $this->assertPattern('/<div class="collection-info">/i');
+        $this->assertNoPattern('/>In collections</i');
+        $this->assertPattern('/<a href="\\/facultypublications\\/islandora\\/object\\/facultyarticles%3Atext">Faculty Articles<\\/a>/i');
+    }
+
     function TestObjectDisplayMetadataLabels() {
-        $this->get('http://'.TARGET_HOST.'/facultypublications/islandora/object/facultyarticles%3A138');
-        $this->standardResponseChecks();
+        $this->get($this->specificTestObjectUrl);
 
         $this->assertPattern('/<tr class="creator author">\s*<td class="mods_label">Author<\\/td>\s*<td class="mods_value">Luana S. Maroja<\\/td>\s*<\\/tr>/i');
         $this->assertPattern('/<tr class="creator author">\s*<td class="mods_label">Author<\\/td>\s*<td class="mods_value">David P. Richardson<\\/td>\s*<\\/tr>/i');
@@ -66,6 +76,24 @@ class SiteFacultyPublicationsTest extends UnboundWebTestCase {
 //
         $this->assertPattern('/<tr class="identifier">\s*<td class="mods_label">doi<\\/td>\s*<td class="mods_value">10.1186\\/1471-2148-14-65<\\/td>\s*<\\/tr>/i');
         $this->assertPattern('/<tr class="identifier">\s*<td class="mods_label">pmid<\\/td>\s*<td class="mods_value">24678642<\\/td>\s*<\\/tr>/i');
+        $this->assertPattern('/<tr class="identifier">\s*<td class="mods_label">issn<\\/td>\s*<td class="mods_value">1471-2148<\\/td>\s*<\\/tr>/i');
+    }
+
+    function TestObjectDisplayDatastreamsSection() {
+        $this->get($this->specificTestObjectUrl);
+
+        $this->assertPattern('/<table class="object-datastreams">/i');
+
+        $this->assertPattern('/<td>OBJ<\\/td>/i');
+        $this->assertPattern('/<a href="\\/facultypublications\\/islandora\\/object\\/facultyarticles%3A138\\/datastream\\/OBJ\\/download">maroja_bmc_evol_bio_2014.pdf<\\/a>/i');
+
+
+        $this->assertPattern('/<td>FULL_TEXT<\\/td>/i');
+        $this->assertPattern('/<a href="\\/facultypublications\\/islandora\\/object\\/facultyarticles%3A138\\/datastream\\/FULL_TEXT\\/download">maroja_bmc_evol_bio_2014.txt<\\/a>/i');
+
+        $this->assertPattern('/<td>TN<\\/td>/i');
+        $this->assertPattern('/<a href="\\/facultypublications\\/islandora\\/object\\/facultyarticles%3A138\\/datastream\\/TN\\/download">TN<\\/a>/i');
+
     }
 
     //############################################################
