@@ -19,37 +19,31 @@ class SiteRonadhCoxTest extends UnboundWebTestCase {
     //############################################################
 
     function TestContentModelDisplay_Audio() {
-        echo "audio test case - NOT USED ON THIS SITE<br/>\n";
+        $this->doContentModelTest_Audio('','','');
     }
 
-    function TestContentModelDisplay_BasicImage(){
-        $test_url = 'http://'.TARGET_HOST.'/ronadhcox/islandora/object/lavaka%3A920';
-        echo "basic_image test case - <a href=\"$test_url\">$test_url</a><br/>\n";
-        $this->get($test_url);
-        $this->standardResponseChecks();
-
-        $this->assertPattern('/<div class="islandora-basic-image-content">/');
-        $this->assertPattern('/src="\\/ronadhcox\\/islandora\\/object\\/lavaka\\%3A920\\/datastream\\/MEDIUM_SIZE\\/view"/');
+    function TestContentModelDisplay_BasicImage() {
+        $this->doContentModelTest_BasicImage('ronadhcox','lavaka','920');
     }
 
     function TestContentModelDisplay_Book(){
-        echo "book test case - NOT USED ON THIS SITE<br/>\n";
+        $this->doContentModelTest_Book('','','');
     }
 
     function TestContentModelDisplay_Compound(){
-        echo "compound test case - NOT USED ON THIS SITE<br/>\n";
+        $this->doContentModelTest_Compound('','','');
     }
 
     function TestContentModelDisplay_LargeImage(){
-        echo "large_image test case - NOT USED ON THIS SITE<br/>\n";
+        $this->doContentModelTest_LargeImage('','','');
     }
 
     function TestContentModelDisplay_PDF() {
-        echo "PDF test case - NOT USED ON THIS SITE<br/>\n";
+        $this->doContentModelTest_PDF('','','');
     }
 
     function TestContentModelDisplay_Video() {
-        echo "video test case - NOT USED ON THIS SITE<br/>\n";
+        $this->doContentModelTest_Video('','','');
     }
 
     //############################################################

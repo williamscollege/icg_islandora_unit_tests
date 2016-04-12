@@ -19,38 +19,31 @@ class SiteFacultyPublicationsTest extends UnboundWebTestCase {
     //############################################################
 
     function TestContentModelDisplay_Audio() {
-        echo "audio test case - NOT USED ON THIS SITE<br/>\n";
+        $this->doContentModelTest_Audio('','','');
     }
 
-    function TestContentModelDisplay_BasicImage(){
-        echo "basic image test case - NOT USED ON THIS SITE<br/>\n";
+    function TestContentModelDisplay_BasicImage() {
+        $this->doContentModelTest_BasicImage('','','');
     }
 
     function TestContentModelDisplay_Book(){
-        echo "book test case - NOT USED ON THIS SITE<br/>\n";
+        $this->doContentModelTest_Book('','','');
     }
 
     function TestContentModelDisplay_Compound(){
-        echo "compound test case - NOT USED ON THIS SITE<br/>\n";
+        $this->doContentModelTest_Compound('','','');
     }
 
     function TestContentModelDisplay_LargeImage(){
-        echo "large_image test case - NOT USED ON THIS SITE<br/>\n";
+        $this->doContentModelTest_LargeImage('','','');
     }
 
     function TestContentModelDisplay_PDF() {
-        $test_url = 'http://'.TARGET_HOST.'/facultypublications/islandora/object/facultyarticles%3A135';
-        echo "PDF test case - <a href=\"$test_url\">$test_url</a><br/>\n";
-        $this->get($test_url);
-        $this->standardResponseChecks();
-
-        $this->assertPattern('/<div class="islandora-pdf-content">/');
-        $this->assertPattern('/<iframe class="pdf"/');
-        $this->assertPattern('/src="http:\\/\\/'.TARGET_HOST.'\\/facultypublications\\/sites\\/all\\/libraries\\/pdfjs\\/web\\/viewer.html\\?file=(http%3A\\/\\/'.TARGET_HOST.'\\/|\\/)facultypublications\\/islandora\\/object\\/facultyarticles\\%253A135\\/datastream\\/OBJ\\/view"/');
+        $this->doContentModelTest_PDF('facultypublications','facultyarticles','135');
     }
 
     function TestContentModelDisplay_Video() {
-        echo "video test case - NOT USED ON THIS SITE<br/>\n";
+        $this->doContentModelTest_Video('','','');
     }
 
     //############################################################

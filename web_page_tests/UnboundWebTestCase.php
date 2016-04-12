@@ -74,11 +74,13 @@ class UnboundWebTestCase extends WMSWebTestCase {
 
         $site_url_part = '';
         $site_url_part_escaped = '';
-        $site_url_part_super_escaped = '';
+        $site_url_part_double_escaped = '';
+        $site_url_part_triple_escaped = '';
         if ($site) {
             $site_url_part = '/'.$site;
-            $site_url_part_escaped = '\\\\/'.$site;
-            $site_url_part_super_escaped = '\\\\\\\\/'.$site;
+            $site_url_part_escaped = '\\/'.$site;
+            $site_url_part_double_escaped = '\\\\/'.$site;
+            $site_url_part_triple_escaped = '\\\\\\/'.$site;
         }
         $test_url = 'http://'.TARGET_HOST.$site_url_part.'/islandora/object/'.$namespace.'%3A'.$id_number.$url_suffix;
 
@@ -89,7 +91,8 @@ class UnboundWebTestCase extends WMSWebTestCase {
         return [
             'site_url_part' => $site_url_part,
             'site_url_part_escaped' => $site_url_part_escaped,
-            'site_url_part_super_escaped' => $site_url_part_super_escaped,
+            'site_url_part_double_escaped' => $site_url_part_double_escaped,
+            'site_url_part_triple_escaped' => $site_url_part_triple_escaped,
             'test_url' => $test_url
         ];
     }
@@ -99,7 +102,10 @@ class UnboundWebTestCase extends WMSWebTestCase {
         if (! $test_values) { return; }
 
         $this->assertPattern('/<div class="islandora-audio-content">/');
-        $this->assertPattern('/<a href="http:\\/\\/'.TARGET_HOST.$test_values['site_url_part_escaped'].'\\/islandora\\/object\\/'.$namespace.'\\%3A'.$id_number.'\\/datastream\\/PROXY_MP3"><img typeof="foaf:Image" src="'.$test_values['site_url_part_escaped'].'\\/islandora\\/object\\/'.$namespace.'\\%3A'.$id_number.'\\/datastream\\/TN\\/view"/');
+//        $this->assertPattern('/<a href="http:\\/\\/'.TARGET_HOST.$test_values['site_url_part_escaped'].'\\/islandora\\/object\\/'.$namespace.'\\%3A'.$id_number.'\\/datastream\\/PROXY_MP3"><img typeof="foaf:Image" src="'.$test_values['site_url_part_escaped'].'\\/islandora\\/object\\/'.$namespace.'\\%3A'.$id_number.'\\/datastream\\/TN\\/view"/');
+
+        $this->assertPattern('/"file":"http:\\\\\/\\\\\/'.TARGET_HOST.$test_values['site_url_part_triple_escaped'].'\\\\\/islandora\\\\\/object\\\\\/'.$namespace.'%3A'.$id_number.'\\\\\/datastream\\\\\/PROXY_MP3\\\\\/file_name_spoof.mp3"/');
+        $this->assertPattern('/<div id="mediaplayer">Loading JW Player...<\\/div>/');
     }
 
     function doContentModelTest_BasicImage($site,$namespace,$id_number) {
@@ -132,7 +138,7 @@ class UnboundWebTestCase extends WMSWebTestCase {
 
         $this->assertPattern('/<div class="islandora-large-image-content">/');
         $this->assertPattern('/id="islandora-openseadragon"/');
-        $this->assertPattern('/\\{"pid":"'.$namespace.':'.$id_number.'","resourceUri":"http:\\\\\/\\\\\/'.TARGET_HOST.$test_values['site_url_part_super_escaped'].'\\\\\/islandora\\\\\/object\\\\\/'.$namespace.'\\%3A'.$id_number.'\\\\\/datastream\\\\\/JP2/');
+        $this->assertPattern('/\\{"pid":"'.$namespace.':'.$id_number.'","resourceUri":"http:\\\\\/\\\\\/'.TARGET_HOST.$test_values['site_url_part_triple_escaped'].'\\\\\/islandora\\\\\/object\\\\\/'.$namespace.'\\%3A'.$id_number.'\\\\\/datastream\\\\\/JP2/');
     }
 
     function doContentModelTest_PDF($site='',$namespace='',$id_number='') {
@@ -148,7 +154,7 @@ class UnboundWebTestCase extends WMSWebTestCase {
         $test_values = $this->_setUpTestFor('video', $site,$namespace,$id_number);
         if (! $test_values) { return; }
 
-        $this->assertPattern('/"islandora_jwplayer":{"thumbnail":"http:\\\\\/\\\\\/'.TARGET_HOST.$test_values['site_url_part_super_escaped'].'\\\\\/islandora\\\\\/object\\\\\/'.$namespace.'\\%3A'.$id_number.'\\\\\/datastream\\\\\/TN\\\\\/view","file":"\\\\\/islandora\\\\\/object\\\\\/'.$namespace.'\\%3A'.$id_number.'\\\\\/datastream\\\\\/MP4\\\\\/view\\\\\/file_name_spoof.mp4"/');
+        $this->assertPattern('/"islandora_jwplayer":{"thumbnail":"http:\\\\\/\\\\\/'.TARGET_HOST.$test_values['site_url_part_triple_escaped'].'\\\\\/islandora\\\\\/object\\\\\/'.$namespace.'\\%3A'.$id_number.'\\\\\/datastream\\\\\/TN\\\\\/view","file":"'.$test_values['site_url_part_triple_escaped'].'\\\\\/islandora\\\\\/object\\\\\/'.$namespace.'\\%3A'.$id_number.'\\\\\/datastream\\\\\/MP4\\\\\/view\\\\\/file_name_spoof.mp4"/');
         $this->assertPattern('/<div class="islandora-video-content">/');
         $this->assertPattern('/<div id="mediaplayer">Loading JW Player...<\\/div>/');
     }

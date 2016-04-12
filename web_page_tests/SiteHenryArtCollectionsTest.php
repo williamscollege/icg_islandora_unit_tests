@@ -19,38 +19,31 @@ class SiteHenryArtCollectionsTest extends UnboundWebTestCase {
     //############################################################
 
     function TestContentModelDisplay_Audio() {
-        echo "audio test case - NOT USED ON THIS SITE<br/>\n";
+        $this->doContentModelTest_Audio('','','');
     }
 
-    function TestContentModelDisplay_BasicImage(){
-        echo "basic_image test case - NOT USED ON THIS SITE<br/>\n";
+    function TestContentModelDisplay_BasicImage() {
+        $this->doContentModelTest_BasicImage('','','');
     }
 
     function TestContentModelDisplay_Book(){
-        echo "book test case - NOT USED ON THIS SITE<br/>\n";
+        $this->doContentModelTest_Book('','','');
     }
 
     function TestContentModelDisplay_Compound(){
-        echo "compound test case - NOT USED ON THIS SITE<br/>\n";
+        $this->doContentModelTest_Compound('','','');
     }
 
     function TestContentModelDisplay_LargeImage(){
-        $test_url = 'http://'.TARGET_HOST.'/henryartcollections/islandora/object/hopkinsforestmaps%3A109';
-        echo "large_image test case - <a href=\"$test_url\">$test_url</a><br/>\n";
-        $this->get($test_url);
-        $this->standardResponseChecks();
-
-        $this->assertPattern('/<div class="islandora-large-image-content">/');
-        $this->assertPattern('/id="islandora-openseadragon"/');
-        $this->assertPattern('/\\{"pid":"hopkinsforestmaps:109","resourceUri":"http:\\\\\/\\\\\/'.TARGET_HOST.'\\\\\/henryartcollections\\\\\/islandora\\\\\/object\\\\\/hopkinsforestmaps\\%3A109\\\\\/datastream\\\\\/JP2/');
+        $this->doContentModelTest_LargeImage('henryartcollections','hopkinsforestmaps','109');
     }
 
     function TestContentModelDisplay_PDF() {
-        echo "PDF test case - NOT USED ON THIS SITE<br/>\n";
+        $this->doContentModelTest_PDF('','','');
     }
 
     function TestContentModelDisplay_Video() {
-        echo "video test case - NOT USED ON THIS SITE<br/>\n";
+        $this->doContentModelTest_Video('','','');
     }
 
     //############################################################

@@ -31,67 +31,95 @@ class SiteWilliamsArchivesTest extends UnboundWebTestCase {
     //--------------------
 
     function TestContentModelDisplay_Audio() {
-        $test_url = 'http://'.TARGET_HOST.'/williamsarchives/islandora/object/andyjaffe%3A55';
-        echo "audio test case - <a href=\"$test_url\">$test_url</a><br/>\n";
-        $this->get($test_url);
-        $this->standardResponseChecks();
-
-        $this->assertPattern('/<div class="islandora-audio-content">/');
-        $this->assertPattern('/"file":"http:\\\\\/\\\\\/'.TARGET_HOST.'\\\\\/williamsarchives\\\\\/islandora\\\\\/object\\\\\/andyjaffe%3A55\\\\\/datastream\\\\\/PROXY_MP3\\\\\/file_name_spoof.mp3"/');
-        $this->assertPattern('/<div id="mediaplayer">Loading JW Player...<\\/div>/');
+        $this->doContentModelTest_Audio('williamsarchives','andyjaffe','55');
     }
 
     function TestContentModelDisplay_BasicImage() {
-        $test_url = 'http://'.TARGET_HOST.'/williamsarchives/islandora/object/daviscenter%3A60';
-        echo "basic_image test case - <a href=\"$test_url\">$test_url</a><br/>\n";
-        $this->get($test_url);
-        $this->standardResponseChecks();
-
-        $this->assertPattern('/<div class="islandora-basic-image-content">/');
-        $this->assertPattern('/src="\\/williamsarchives\\/islandora\\/object\\/daviscenter\\%3A60\\/datastream\\/MEDIUM_SIZE\\/view"/');
+        $this->doContentModelTest_BasicImage('williamsarchives','daviscenter','60');
     }
 
-    function TestContentModelDisplay_Book() {
-        $test_url = 'http://'.TARGET_HOST.'/williamsarchives/islandora/object/gulielmensian%3A2228#page/1/mode/1up';
-        echo "book test case - <a href=\"$test_url\">$test_url</a><br/>\n";
-        $this->get($test_url);
-        $this->standardResponseChecks();
-
-        $this->assertPattern('/"islandoraInternetArchiveBookReader":\\{"book":"gulielmensian:2228"/');
-        $this->assertPattern('/<div id="book-viewer">/');
-        $this->assertPattern('/<div id="BookReader" class="islandora-internet-archive-bookreader">/');
+    function TestContentModelDisplay_Book(){
+        $this->doContentModelTest_Book('williamsarchives','gulielmensian','2228');
     }
 
     function TestContentModelDisplay_Compound(){
-        echo "compound test case - NOT USED ON THIS SITE<br/>\n";
+        $this->doContentModelTest_Compound('','','');
     }
 
     function TestContentModelDisplay_LargeImage(){
-        echo "large_image test case - NOT USED ON THIS SITE<br/>\n";
+        $this->doContentModelTest_LargeImage('','','');
     }
 
     function TestContentModelDisplay_PDF() {
-        $test_url = 'http://'.TARGET_HOST.'/williamsarchives/islandora/object/dwight%3A88';
-        echo "PDF test case - <a href=\"$test_url\">$test_url</a><br/>\n";
-        $this->get($test_url);
-        $this->standardResponseChecks();
-
-        $this->assertPattern('/<div class="islandora-pdf-content">/');
-        $this->assertPattern('/<iframe class="pdf"/');
-        $this->assertPattern('/src="http:\\/\\/'.TARGET_HOST.'\\/williamsarchives\\/sites\\/all\\/libraries\\/pdfjs\\/web\\/viewer.html\\?file=(http%3A\\/\\/'.TARGET_HOST.'\\/|\\/)williamsarchives\\/islandora\\/object\\/dwight\\%253A88\\/datastream\\/OBJ\\/view"/');
-//        echo $this->getBrowser()->getContent();
+        $this->doContentModelTest_PDF('williamsarchives','dwight','88');
     }
 
     function TestContentModelDisplay_Video() {
-        $test_url = 'http://'.TARGET_HOST.'/williamsarchives/islandora/object/andyjaffe%3A42';
-        echo "Video test case - <a href=\"$test_url\">$test_url</a><br/>\n";
-        $this->get($test_url);
-        $this->standardResponseChecks();
-
-        $this->assertPattern('/"islandora_jwplayer":{"thumbnail":"http:\\\\\/\\\\\/'.TARGET_HOST.'\\\\\/williamsarchives\\\\\/islandora\\\\\/object\\\\\/andyjaffe\\%3A42\\\\\/datastream\\\\\/TN\\\\\/view","file":"\\\\\/williamsarchives\\\\\/islandora\\\\\/object\\\\\/andyjaffe\\%3A42\\\\\/datastream\\\\\/MP4\\\\\/view\\\\\/file_name_spoof.mp4"/');
-        $this->assertPattern('/<div class="islandora-video-content">/');
-        $this->assertPattern('/<div id="mediaplayer">Loading JW Player...<\\/div>/');
+        $this->doContentModelTest_Video('williamsarchives','andyjaffe','42');
     }
+
+//    function TestContentModelDisplay_Audio() {
+//        $test_url = 'http://'.TARGET_HOST.'/williamsarchives/islandora/object/andyjaffe%3A55';
+//        echo "audio test case - <a href=\"$test_url\">$test_url</a><br/>\n";
+//        $this->get($test_url);
+//        $this->standardResponseChecks();
+//
+//        $this->assertPattern('/<div class="islandora-audio-content">/');
+//        $this->assertPattern('/"file":"http:\\\\\/\\\\\/'.TARGET_HOST.'\\\\\/williamsarchives\\\\\/islandora\\\\\/object\\\\\/andyjaffe%3A55\\\\\/datastream\\\\\/PROXY_MP3\\\\\/file_name_spoof.mp3"/');
+//        $this->assertPattern('/<div id="mediaplayer">Loading JW Player...<\\/div>/');
+//    }
+//
+//    function TestContentModelDisplay_BasicImage() {
+//        $test_url = 'http://'.TARGET_HOST.'/williamsarchives/islandora/object/daviscenter%3A60';
+//        echo "basic_image test case - <a href=\"$test_url\">$test_url</a><br/>\n";
+//        $this->get($test_url);
+//        $this->standardResponseChecks();
+//
+//        $this->assertPattern('/<div class="islandora-basic-image-content">/');
+//        $this->assertPattern('/src="\\/williamsarchives\\/islandora\\/object\\/daviscenter\\%3A60\\/datastream\\/MEDIUM_SIZE\\/view"/');
+////    }
+//
+//    function TestContentModelDisplay_Book() {
+//        $test_url = 'http://'.TARGET_HOST.'/williamsarchives/islandora/object/gulielmensian%3A2228#page/1/mode/1up';
+//        echo "book test case - <a href=\"$test_url\">$test_url</a><br/>\n";
+//        $this->get($test_url);
+//        $this->standardResponseChecks();
+//
+//        $this->assertPattern('/"islandoraInternetArchiveBookReader":\\{"book":"gulielmensian:2228"/');
+//        $this->assertPattern('/<div id="book-viewer">/');
+//        $this->assertPattern('/<div id="BookReader" class="islandora-internet-archive-bookreader">/');
+//    }
+//
+//    function TestContentModelDisplay_Compound(){
+//        echo "compound test case - NOT USED ON THIS SITE<br/>\n";
+//    }
+//
+//    function TestContentModelDisplay_LargeImage(){
+////        echo "large_image test case - NOT USED ON THIS SITE<br/>\n";
+////    }
+//
+//    function TestContentModelDisplay_PDF() {
+//        $test_url = 'http://'.TARGET_HOST.'/williamsarchives/islandora/object/dwight%3A88';
+//        echo "PDF test case - <a href=\"$test_url\">$test_url</a><br/>\n";
+//        $this->get($test_url);
+//        $this->standardResponseChecks();
+//
+//        $this->assertPattern('/<div class="islandora-pdf-content">/');
+//        $this->assertPattern('/<iframe class="pdf"/');
+//        $this->assertPattern('/src="http:\\/\\/'.TARGET_HOST.'\\/williamsarchives\\/sites\\/all\\/libraries\\/pdfjs\\/web\\/viewer.html\\?file=(http%3A\\/\\/'.TARGET_HOST.'\\/|\\/)williamsarchives\\/islandora\\/object\\/dwight\\%253A88\\/datastream\\/OBJ\\/view"/');
+////        echo $this->getBrowser()->getContent();
+//    }
+//
+//    function TestContentModelDisplay_Video() {
+//        $test_url = 'http://'.TARGET_HOST.'/williamsarchives/islandora/object/andyjaffe%3A42';
+//        echo "Video test case - <a href=\"$test_url\">$test_url</a><br/>\n";
+//        $this->get($test_url);
+//        $this->standardResponseChecks();
+//
+//        $this->assertPattern('/"islandora_jwplayer":{"thumbnail":"http:\\\\\/\\\\\/'.TARGET_HOST.'\\\\\/williamsarchives\\\\\/islandora\\\\\/object\\\\\/andyjaffe\\%3A42\\\\\/datastream\\\\\/TN\\\\\/view","file":"\\\\\/williamsarchives\\\\\/islandora\\\\\/object\\\\\/andyjaffe\\%3A42\\\\\/datastream\\\\\/MP4\\\\\/view\\\\\/file_name_spoof.mp4"/');
+//        $this->assertPattern('/<div class="islandora-video-content">/');
+//        $this->assertPattern('/<div id="mediaplayer">Loading JW Player...<\\/div>/');
+//    }
 
     //--------------------
 
