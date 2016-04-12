@@ -39,7 +39,7 @@ class SiteFacultyPublicationsTest extends UnboundWebTestCase {
     }
 
     function TestContentModelDisplay_PDF() {
-        $this->doContentModelTest_PDF('facultypublications','facultyarticles','135');
+        $this->doContentModelTest_PDF('facultypublications','facultyarticles','138');
     }
 
     function TestContentModelDisplay_Video() {
@@ -49,16 +49,23 @@ class SiteFacultyPublicationsTest extends UnboundWebTestCase {
     //############################################################
 
     function TestObject_Specific() {
-        $this->get('http://'.TARGET_HOST.'/facultypublications/islandora/object/facultyarticles%3A15');
+        $this->get('http://'.TARGET_HOST.'/facultypublications/islandora/object/facultyarticles%3A138');
         $this->standardResponseChecks();
     }
 
     function TestObjectDisplayMetadataLabels() {
-        $this->get('http://'.TARGET_HOST.'/facultypublications/islandora/object/facultyarticles%3A139');
+        $this->get('http://'.TARGET_HOST.'/facultypublications/islandora/object/facultyarticles%3A138');
         $this->standardResponseChecks();
 
-        $this->assertPattern('/AUTHOR/i');
-        $this->assertPattern('/DEPARTMENT/i');
+        $this->assertPattern('/<tr class="creator author">\s*<td class="mods_label">Author<\\/td>\s*<td class="mods_value">Luana S. Maroja<\\/td>\s*<\\/tr>/i');
+        $this->assertPattern('/<tr class="creator author">\s*<td class="mods_label">Author<\\/td>\s*<td class="mods_value">David P. Richardson<\\/td>\s*<\\/tr>/i');
+        $this->assertPattern('/<tr class="department">\s*<td class="mods_label">Department<\\/td>\s*<td class="mods_value">Biology<\\/td>\s*<\\/tr>/i');
+        $this->assertPattern('/<tr class="department">\s*<td class="mods_label">Department<\\/td>\s*<td class="mods_value">Chemistry<\\/td>\s*<\\/tr>/i');
+//
+        $this->assertPattern('/<tr class="url">\s*<td class="mods_label">url<\\/td>\s*<td class="mods_value"><a href="http:\\/\\/www.biomedcentral.com\\/1471-2148\\/14\\/65">http:\\/\\/www.biomedcentral.com\\/1471-2148\\/14\\/65<\\/a><\\/td>\s*<\\/tr>/i');
+//
+        $this->assertPattern('/<tr class="identifier">\s*<td class="mods_label">doi<\\/td>\s*<td class="mods_value">10.1186\\/1471-2148-14-65<\\/td>\s*<\\/tr>/i');
+        $this->assertPattern('/<tr class="identifier">\s*<td class="mods_label">pmid<\\/td>\s*<td class="mods_value">24678642<\\/td>\s*<\\/tr>/i');
     }
 
     //############################################################
