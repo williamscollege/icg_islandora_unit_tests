@@ -71,12 +71,15 @@ class SiteFacultyPublicationsTest extends UnboundWebTestCase {
         $this->assertPattern('/<tr class="creator author">\s*<td class="mods_label">Author<\\/td>\s*<td class="mods_value">David P. Richardson<\\/td>\s*<\\/tr>/i');
         $this->assertPattern('/<tr class="department">\s*<td class="mods_label">Department<\\/td>\s*<td class="mods_value">Biology<\\/td>\s*<\\/tr>/i');
         $this->assertPattern('/<tr class="department">\s*<td class="mods_label">Department<\\/td>\s*<td class="mods_value">Chemistry<\\/td>\s*<\\/tr>/i');
-//
+
         $this->assertPattern('/<tr class="url">\s*<td class="mods_label">url<\\/td>\s*<td class="mods_value"><a href="http:\\/\\/www.biomedcentral.com\\/1471-2148\\/14\\/65">http:\\/\\/www.biomedcentral.com\\/1471-2148\\/14\\/65<\\/a><\\/td>\s*<\\/tr>/i');
-//
+
         $this->assertPattern('/<tr class="identifier">\s*<td class="mods_label">doi<\\/td>\s*<td class="mods_value">10.1186\\/1471-2148-14-65<\\/td>\s*<\\/tr>/i');
         $this->assertPattern('/<tr class="identifier">\s*<td class="mods_label">pmid<\\/td>\s*<td class="mods_value">24678642<\\/td>\s*<\\/tr>/i');
         $this->assertPattern('/<tr class="identifier">\s*<td class="mods_label">issn<\\/td>\s*<td class="mods_value">1471-2148<\\/td>\s*<\\/tr>/i');
+
+        $this->assertPattern('/<td class="mods_label">Start Page<\\/td>/');
+        $this->assertPattern('/<td class="mods_label">Date Issued<\\/td>/');
     }
 
     function TestObjectDisplayDatastreamsSection() {
@@ -108,4 +111,14 @@ class SiteFacultyPublicationsTest extends UnboundWebTestCase {
         $this->standardResponseChecks();
     }
 
+    function TestSearch_Facets() {
+        $this->get('http://'.TARGET_HOST.'/facultypublications/islandora/search/');
+
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Author<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Department<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Type of Content<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Subject<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Geographic Subject<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>File Type<\\/h3>/i');
+    }
 }
