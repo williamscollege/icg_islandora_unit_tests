@@ -79,4 +79,9 @@ class SiteMayaMotulDeSanJoseArchaeologyTest extends UnboundWebTestCase {
         $this->standardResponseChecks();
     }
 
+    function TestSearch_Facets() {
+        $this->get('http://'.TARGET_HOST.'/mayamotuldesanjosearchaeology/islandora/search/');
+        $this->standardFacetsChecks();
+    }
+
 }

@@ -73,4 +73,9 @@ class SiteHenryArtCollectionsTest extends UnboundWebTestCase {
         $this->standardResponseChecks();
     }
 
+    function TestSearch_Facets() {
+        $this->get('http://'.TARGET_HOST.'/henryartcollections/islandora/search/');
+        $this->standardFacetsChecks();
+    }
+
 }

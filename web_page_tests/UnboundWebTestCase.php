@@ -33,9 +33,22 @@ class UnboundWebTestCase extends WMSWebTestCase {
         $this->assertNoText('Warning:');
         $this->assertNoText('Notice:');
         if ($this->reporter->reporter->reporter->getFailCount() > $initialFailCount) {
-            echo "<b style=\"color:#00a;\">standard reponse check failures for ".$this->getUrl()."</b><br/><br/>\n";
+            echo "<b style=\"color:#00a;\">standard <u>reponse</u> check failures for ".$this->getUrl()."</b><br/><br/>\n";
         }
 
+    }
+
+    function standardFacetsChecks() {
+        $initialFailCount = $this->reporter->reporter->reporter->getFailCount();
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Author<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Department<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Resource Type<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Subject<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Geographic<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Digital Media Type<\\/h3>/i');
+        if ($this->reporter->reporter->reporter->getFailCount() > $initialFailCount) {
+            echo "<b style=\"color:#00a;\">standard <u>facets</u> check failures for ".$this->getUrl()."</b><br/><br/>\n";
+        }
     }
 
     //############################################################

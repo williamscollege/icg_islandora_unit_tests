@@ -31,6 +31,17 @@ class Site_Unbound_Test extends UnboundWebTestCase {
         $this->standardResponseChecks();
     }
 
+    function TestSearch_Facets() {
+        $this->get('http://'.TARGET_HOST.'/islandora/search/');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Collection<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Name<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Department or Group<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Type<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Subject<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Geographic<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Language<\\/h3>/i');
+    }
+
     function TestCollectionAccessibility() {
 
         echo '<p>TODO: add the full list of collections to check for on the main site http://'.TARGET_HOST."</p>\n";

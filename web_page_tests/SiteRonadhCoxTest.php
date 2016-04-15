@@ -73,4 +73,13 @@ class SiteRonadhCoxTest extends UnboundWebTestCase {
         $this->standardResponseChecks();
     }
 
+    function TestSearch_Facets() {
+        $this->get('http://'.TARGET_HOST.'/ronadhcox/islandora/search/');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Collection<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Photographer<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Subject<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Geographic<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Time Period<\\/h3>/i');
+    }
+
 }
