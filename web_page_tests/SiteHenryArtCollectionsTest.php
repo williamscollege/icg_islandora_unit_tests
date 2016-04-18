@@ -75,7 +75,16 @@ class SiteHenryArtCollectionsTest extends UnboundWebTestCase {
 
     function TestSearch_Facets() {
         $this->get('http://'.TARGET_HOST.'/henryartcollections/islandora/search/');
-        $this->standardFacetsChecks();
+
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Collector<\\/h3>/i');
+//        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Source<\\/h3>/i');
+//        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Surveyor<\\/h3>/i');
+//        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Date<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Language<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Resource Type<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Subject<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Geographic Subject<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Digital Media Type<\\/h3>/i');
     }
 
 }
