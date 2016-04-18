@@ -129,6 +129,16 @@ class UnboundWebTestCase extends WMSWebTestCase {
         $this->assertPattern('/src="'.$test_values['site_url_part_escaped'].'\\/islandora\\/object\\/'.$namespace.'\\%3A'.$id_number.'\\/datastream\\/MEDIUM_SIZE\\/view"/');
     }
 
+    function doContentModelTest_Binary($site,$namespace,$id_number) {
+        $test_values = $this->_setUpTestFor('binary', $site,$namespace,$id_number);
+        if (! $test_values) { return; }
+
+        $this->fail("TESTS FOR BINARY CONTENT MODEL NOT IMPLEMENTED (hook in place)");
+//        $this->assertPattern('/<div class="islandora-basic-image-content">/');
+//        $this->assertPattern('/src="'.$test_values['site_url_part_escaped'].'\\/islandora\\/object\\/'.$namespace.'\\%3A'.$id_number.'\\/datastream\\/MEDIUM_SIZE\\/view"/');
+    }
+
+
     function doContentModelTest_Book($site,$namespace,$id_number) {
         $test_values = $this->_setUpTestFor('book', $site,$namespace,$id_number,'#page/1/mode/1up');
         if (! $test_values) { return; }
