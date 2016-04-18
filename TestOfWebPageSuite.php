@@ -15,9 +15,9 @@ class TestOfWebSuite extends TestSuite {
 
 //        $this->addFile('web_page_tests/Site_Unbound_Test.php');
 //
-        $this->addFile('web_page_tests/SiteFacultyPublicationsTest.php');
+//        $this->addFile('web_page_tests/SiteFacultyPublicationsTest.php');
 //
-//        $this->addFile('web_page_tests/SiteMayaMotulDeSanJoseArchaeologyTest.php');
+        $this->addFile('web_page_tests/SiteMayaMotulDeSanJoseArchaeologyTest.php');
 
 //        $this->addFile('web_page_tests/SiteRonadhCoxTest.php');
 
