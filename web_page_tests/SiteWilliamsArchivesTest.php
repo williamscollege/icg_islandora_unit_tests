@@ -203,7 +203,12 @@ class SiteWilliamsArchivesTest extends UnboundWebTestCase {
 
     function TestSearch_Facets() {
         $this->get('http://'.TARGET_HOST.'/williamsarchives/islandora/search/');
-        $this->standardFacetsChecks();
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Author<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Department<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Resource Type<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Subject<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Geographic<\\/h3>/i');
+        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Digital Media Type<\\/h3>/i');
     }
 
 }
