@@ -51,7 +51,7 @@ class SiteFacultyPublicationsTest extends UnboundWebTestCase {
     private $specificTestObjectUrl = '';
 
     function TestObject_Specific() {
-        $this->specificTestObjectUrl = 'http://'.TARGET_HOST.'/facultypublications/islandora/object/facultyarticles%3A138';
+        $this->specificTestObjectUrl = URL_STEM_SSL.TARGET_HOST.'/facultypublications/islandora/object/facultyarticles%3A138';
         $this->get($this->specificTestObjectUrl);
         $this->standardResponseChecks();
     }
@@ -102,17 +102,17 @@ class SiteFacultyPublicationsTest extends UnboundWebTestCase {
     //############################################################
 
     function TestSearch_Author() {
-        $this->get('http://'.TARGET_HOST.'/facultypublications/islandora/search?f[0]=mods_name_Author_ms%3A%22Morgan%5C%20McGuire%5C%20%22');
+        $this->get(URL_STEM_SSL.TARGET_HOST.'/facultypublications/islandora/search?f[0]=mods_name_Author_ms%3A%22Morgan%5C%20McGuire%5C%20%22');
         $this->standardResponseChecks();
     }
 
     function TestSearch_SortTitle() {
-        $this->get('http://'.TARGET_HOST.'/facultypublications/islandora/search/%20?sort=sort.title%20asc');
+        $this->get(URL_STEM_SSL.TARGET_HOST.'/facultypublications/islandora/search/%20?sort=sort.title%20asc');
         $this->standardResponseChecks();
     }
 
     function TestSearch_Facets() {
-        $this->get('http://'.TARGET_HOST.'/facultypublications/islandora/search/');
+        $this->get(URL_STEM_SSL.TARGET_HOST.'/facultypublications/islandora/search/');
 
         $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Author<\\/h3>/i');
         $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Department<\\/h3>/i');
