@@ -2,7 +2,7 @@
 
 #### AUTHORS
 * David Keiser-Clark (dwk2@williams.edu), Office for Information Technology, Williams College
-* (original author: Chris Warren, formerly of Williams College)
+* (Chris Warren, formerly of Williams College)
 
 ## INSTRUCTIONS
 This is a set of unit tests, based on the [Simpletest](http://simpletest.org/index.html) framework, for verifying functionality of an Islandora site or multiple sites.
