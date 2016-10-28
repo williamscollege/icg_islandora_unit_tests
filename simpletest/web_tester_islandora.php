@@ -20,13 +20,13 @@ require_once dirname(__FILE__) . '/web_tester.php';
  *    @package  SimpleTest
  *    @subpackage   WebTester
  */
-abstract class WMSWebTestCase extends WebTestCase {
+abstract class IslandoraWebTestCase extends WebTestCase {
 
     function assertEltByIdHasAttrOfValue($eltId,$attrName,$attrValueExpected = true) {
         $matches = array();
         $haystack = $this->getBrowser()->getContent();
 
-//        preg_match('/(\<[^\>]\s+id\s*=\s*"'.$eltId.'"\s+[^\>]*\>)/',$this->getBrowser()->getContent(),$matches);
+//      preg_match('/(\<[^\>]\s+id\s*=\s*"'.$eltId.'"\s+[^\>]*\>)/',$this->getBrowser()->getContent(),$matches);
         preg_match('/(\<[^\>]*\s+id\s*=\s*"'.$eltId.'"\s+[^\>]*\>)/',$haystack,$matches);
 
         //echo $matches[1];

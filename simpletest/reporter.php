@@ -74,9 +74,13 @@ class HtmlReporter extends SimpleReporter {
      *    @return string            CSS code as text.
      *    @access protected
      */
+// DKC edited on 20161020
     protected function getCss() {
-        return ".fail { background-color: inherit; color: red; }" .
-                ".pass { background-color: inherit; color: green; }" .
+        return 
+        		"body { font-size: 90%; }" .
+        		".fail { background-color: inherit; color: red; font-weight: bold; }" .
+                ".pass { background-color: inherit; color: green; font-weight: bold; }" .
+                ".skip { background-color: inherit; color: #666666; font-weight: bold; }" .
                 " pre { background-color: lightgray; color: inherit; }";
     }
 
@@ -107,13 +111,14 @@ class HtmlReporter extends SimpleReporter {
      *    @param string $message    Failure message displayed in
      *                              the context of the other tests.
      */
+// DKC edited on 20161020
     function paintFail($message) {
         parent::paintFail($message);
-        print "<span class=\"fail\">Fail</span>: ";
+        print "<p><span class=\"fail\">Fail</span>: ";
         $breadcrumb = $this->getTestList();
         array_shift($breadcrumb);
         print implode(" -&gt; ", $breadcrumb);
-        print " -&gt; " . $this->htmlEntities($message) . "<br />\n";
+        print " -&gt; " . $this->htmlEntities($message) . "</p>\n";
     }
 
     /**
@@ -121,13 +126,14 @@ class HtmlReporter extends SimpleReporter {
      *    @param string $message        Message is ignored.
      *    @access public
      */
+// DKC edited on 20161020
     function paintError($message) {
         parent::paintError($message);
-        print "<span class=\"fail\">Exception</span>: ";
+        print "<p><span class=\"fail\">Exception</span>: ";
         $breadcrumb = $this->getTestList();
         array_shift($breadcrumb);
         print implode(" -&gt; ", $breadcrumb);
-        print " -&gt; <strong>" . $this->htmlEntities($message) . "</strong><br />\n";
+        print " -&gt; <strong>" . $this->htmlEntities($message) . "</strong></p>\n";
     }
 
     /**
@@ -135,9 +141,10 @@ class HtmlReporter extends SimpleReporter {
      *    @param Exception $exception        Exception to display.
      *    @access public
      */
+// DKC edited on 20161020
     function paintException($exception) {
         parent::paintException($exception);
-        print "<span class=\"fail\">Exception</span>: ";
+        print "<p><span class=\"fail\">Exception</span>: ";
         $breadcrumb = $this->getTestList();
         array_shift($breadcrumb);
         print implode(" -&gt; ", $breadcrumb);
@@ -145,7 +152,7 @@ class HtmlReporter extends SimpleReporter {
                 '] with message ['. $exception->getMessage() .
                 '] in ['. $exception->getFile() .
                 ' line ' . $exception->getLine() . ']';
-        print " -&gt; <strong>" . $this->htmlEntities($message) . "</strong><br />\n";
+        print " -&gt; <strong>" . $this->htmlEntities($message) . "</strong></p>\n";
     }
 
     /**
@@ -153,13 +160,14 @@ class HtmlReporter extends SimpleReporter {
      *    @param string $message    Text of skip condition.
      *    @access public
      */
+// DKC edited on 20161020
     function paintSkip($message) {
         parent::paintSkip($message);
-        print "<span class=\"pass\">Skipped</span>: ";
+        print "<p><span class=\"pass\">Skipped</span>: ";
         $breadcrumb = $this->getTestList();
         array_shift($breadcrumb);
         print implode(" -&gt; ", $breadcrumb);
-        print " -&gt; " . $this->htmlEntities($message) . "<br />\n";
+        print " -&gt; " . $this->htmlEntities($message) . "</p>\n";
     }
 
     /**

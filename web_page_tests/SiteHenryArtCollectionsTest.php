@@ -1,90 +1,116 @@
 <?php
-//require_once dirname(__FILE__) . '/../CONF_for_testing.php';
-//require_once dirname(__FILE__) . '/../simpletest/WMS_web_tester.php';
-require_once('UnboundWebTestCase.php');
+	require_once('Site_Common_Battery_Test.php');
 
-class SiteHenryArtCollectionsTest extends UnboundWebTestCase {
+	class SiteHenryArtCollectionsTest extends MultiSiteIslandoraWebTestCase {
 
-    function SiteHenryArtCollectionsTest() {
-        $this->setUnboundSite('henryartcollections');
-        echo "\n<br/><br/>\n<b>TESTING SITE ".$this->getTestingUrlBase()."</b><br/>\n";
-    }
+		function SiteHenryArtCollectionsTest() {
+			# Set site name
+			$this->setMultiSite('henryartcollections');
+			echo "<p></p><hr><h3>TESTING: " . $this->getTestingUrlBase() . "</h3>";
+		}
 
-    //############################################################
+		#############################################################
+		# Test Basics and Specific Pages
+		#############################################################
 
-    function TestSiteBasics() {
-        $this->doStandardBasicSiteTests();
-    }
+		function TestSiteBasics() {
+			$this->doStandardBasicSiteTests();
+		}
 
-    //############################################################
+		function TestProjectLeadPage() {
+			$this->get(FULL_APP_URL . '/henryartcollections/project-lead');
+			$this->standardResponseChecks();
+		}
 
-    function TestContentModelDisplay_Audio() {
-        $this->doContentModelTest_Audio('','','');
-    }
+		#############################################################
+		# Test Solution Packs
+		#############################################################
 
-    function TestContentModelDisplay_BasicImage() {
-        $this->doContentModelTest_BasicImage('','','');
-    }
+		function Test_SolutionPacks_Begin() {
+			echo "<p><strong>Testing Solution Packs</strong></p>";
+			echo "<ul>";
+		}
 
-    function TestContentModelDisplay_Book(){
-        $this->doContentModelTest_Book('','','');
-    }
+		function TestContentModelDisplay_Audio() {
+			$this->doContentModelTest_Audio('', '', '');
+		}
 
-    function TestContentModelDisplay_Compound(){
-        $this->doContentModelTest_Compound('','','');
-    }
+		function TestContentModelDisplay_BasicImage() {
+			$this->doContentModelTest_BasicImage('', '', '');
+		}
 
-    function TestContentModelDisplay_LargeImage(){
-        $this->doContentModelTest_LargeImage('henryartcollections','hopkinsforestmaps','109');
-    }
+		function TestContentModelDisplay_Binary() {
+			$this->doContentModelTest_Binary('', '', '');
+		}
 
-    function TestContentModelDisplay_PDF() {
-        $this->doContentModelTest_PDF('','','');
-    }
+		function TestContentModelDisplay_Book() {
+			$this->doContentModelTest_Book('', '', '');
+		}
 
-    function TestContentModelDisplay_Video() {
-        $this->doContentModelTest_Video('','','');
-    }
+		function TestContentModelDisplay_Compound() {
+			$this->doContentModelTest_Compound('', '', '');
+		}
 
-    //############################################################
+		function TestContentModelDisplay_LargeImage() {
+			$this->doContentModelTest_LargeImage('henryartcollections', 'hopkinsforestmaps', '109');
+		}
 
-    function TestProjectLeadPage() {
-        $this->get('http://'.TARGET_HOST.'/henryartcollections/project-lead');
-        $this->standardResponseChecks();
-    }
+		function TestContentModelDisplay_PDF() {
+			$this->doContentModelTest_PDF('', '', '');
+		}
 
-    function TestObject_Collection() {
-        $this->get('http://'.TARGET_HOST.'/henryartcollections/islandora/object/hopkinsforestmaps%3Aimages');
-        $this->standardResponseChecks();
-    }
+		function TestContentModelDisplay_Video() {
+			$this->doContentModelTest_Video('', '', '');
+		}
 
-    function TestObject_Specific() {
-        $this->get('http://'.TARGET_HOST.'/henryartcollections/islandora/object/hopkinsforestmaps%3A70');
-        $this->standardResponseChecks();
-    }
+		function Test_SolutionPacks_End() {
+			echo "</ul>";
+		}
 
-    function TestSearch_SubjectGeographic() {
-        $this->get('http://'.TARGET_HOST.'/henryartcollections/islandora/search?f[0]=mods_subject_geographic_ms%3A"Hopkins%5C%20Memorial%5C%20Forest"');
-        $this->standardResponseChecks();
-    }
+		#############################################################
+		# Test Collections and Objects (this site only)
+		#############################################################
 
-    function TestSearch_Sort_Title() {
-        $this->get('http://'.TARGET_HOST.'/henryartcollections/islandora/search/%20?sort=sort.title%20asc');
-        $this->standardResponseChecks();
-    }
+		function TestAccessibility_Collection_And_Object() {
+			# array elements: ['collection_id', 'object_id']
+			$array_collection_and_object_ids = [
+				['hopkinsforestmaps%3Aimages', 'hopkinsforestmaps%3A241']
+				, ['islandora%3Aicgdemo', '']
+				, ['rosenburgarchives%3Aimages', 'rosenburgarchives%3A121']
+				// , ['','']
+			];
 
-    function TestSearch_Facets() {
-        $this->get('http://'.TARGET_HOST.'/henryartcollections/islandora/search/');
+			$this->doTestSite_Collections_and_Objects($array_collection_and_object_ids);
+		}
 
-        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Collector<\\/h3>/i');
-//        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Source<\\/h3>/i');
-//        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Surveyor<\\/h3>/i');
-//        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Date<\\/h3>/i');
-        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Language<\\/h3>/i');
-        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Resource Type<\\/h3>/i');
-        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Subject<\\/h3>/i');
-        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Geographic Subject<\\/h3>/i');
-        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Digital Media Type<\\/h3>/i');
-    }
 
-}
+		#############################################################
+		# Test Search and Facets
+		#############################################################
+
+		function TestSearch_SubjectGeographic() {
+			$this->get(FULL_APP_URL . '/henryartcollections/islandora/search?f[0]=mods_subject_geographic_ms%3A"Hopkins%5C%20Memorial%5C%20Forest"');
+			$this->standardResponseChecks();
+		}
+
+		function TestSearch_Sort_Title() {
+			$this->get(FULL_APP_URL . '/henryartcollections/islandora/search/%20?sort=sort.title%20asc');
+			$this->standardResponseChecks();
+		}
+
+		function TestSearch_Facets() {
+			$this->get(FULL_APP_URL . '/henryartcollections/islandora/search');
+
+			$this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Creator \(Personal\)<\\/h3>/i');
+			$this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Creator \(Corporate\)<\\/h3>/i');
+			$this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Date<\\/h3>/i');
+		}
+
+		#############################################################
+		# Utility Tool: Flush content to keep browser alive
+		#############################################################
+		function Test_Utility_KeepBrowserAlive() {
+			$this->util_KeepBrowserAlive_Flush(); // prevent browser timeout issues
+		}
+
+	}

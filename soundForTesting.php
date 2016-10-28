@@ -1,5 +1,5 @@
 <?php
-	require_once('simpletest/WMS_web_tester.php');
+	require_once('simpletest/web_tester_islandora.php');
 
 	class soundForTesting extends TestSuite {
 		public function TestOfSoundCompleted() {

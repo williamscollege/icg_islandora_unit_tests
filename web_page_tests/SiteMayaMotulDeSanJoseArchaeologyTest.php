@@ -1,90 +1,115 @@
 <?php
-//require_once dirname(__FILE__) . '/../CONF_for_testing.php';
-//require_once dirname(__FILE__) . '/../simpletest/WMS_web_tester.php';
-require_once('UnboundWebTestCase.php');
+	require_once('Site_Common_Battery_Test.php');
 
-class SiteMayaMotulDeSanJoseArchaeologyTest extends UnboundWebTestCase {
+	class SiteMayaMotulDeSanJoseArchaeologyTest extends MultiSiteIslandoraWebTestCase {
 
-    function SiteMayaMotulDeSanJoseArchaeologyTest() {
-        $this->setUnboundSite('mayamotuldesanjosearchaeology');
-        echo "\n<br/><br/>\n<b>TESTING SITE ".$this->getTestingUrlBase()."</b><br/>\n";
-    }
+		function SiteMayaMotulDeSanJoseArchaeologyTest() {
+			# Set site name
+			$this->setMultiSite('mayamotuldesanjosearchaeology');
+			echo "<p></p><hr><h3>TESTING: " . $this->getTestingUrlBase() . "</h3>";
+		}
 
-    //############################################################
+		#############################################################
+		# Test Basics and Specific Pages
+		#############################################################
 
-    function TestSiteBasics() {
-        $this->doStandardBasicSiteTests();
-    }
+		function TestSiteBasics() {
+			$this->doStandardBasicSiteTests();
+		}
 
-    //############################################################
+		function TestProjectLeadPage() {
+			$this->get(FULL_APP_URL . '/mayamotuldesanjosearchaeology/project-leads');
+			$this->standardResponseChecks();
+		}
 
-    function TestContentModelDisplay_Audio() {
-        $this->doContentModelTest_Audio('','','');
-    }
+		#############################################################
+		# Test Solution Packs
+		#############################################################
 
-    function TestContentModelDisplay_BasicImage() {
-        $this->doContentModelTest_BasicImage('','','');
-    }
+		function Test_SolutionPacks_Begin() {
+			echo "<p><strong>Testing Solution Packs</strong></p>";
+			echo "<ul>";
+		}
 
-    function TestContentModelDisplay_Book(){
-        $this->doContentModelTest_Book('','','');
-    }
+		function TestContentModelDisplay_Audio() {
+			$this->doContentModelTest_Audio('', '', '');
+		}
 
-    function TestContentModelDisplay_Compound(){
-        $this->doContentModelTest_Compound('','','');
-    }
+		function TestContentModelDisplay_BasicImage() {
+			$this->doContentModelTest_BasicImage('', '', '');
+		}
 
-    function TestContentModelDisplay_LargeImage(){
-        $this->doContentModelTest_LargeImage('mayamotuldesanjosearchaeology','motul','372');
-    }
+		function TestContentModelDisplay_Binary() {
+			$this->doContentModelTest_Binary('', '', '');
+		}
 
-    function TestContentModelDisplay_PDF() {
-        $this->doContentModelTest_PDF('mayamotuldesanjosearchaeology','motul','519');
-    }
+		function TestContentModelDisplay_Book() {
+			$this->doContentModelTest_Book('', '', '');
+		}
 
-    function TestContentModelDisplay_Video() {
-        $this->doContentModelTest_Video('','','');
-    }
+		function TestContentModelDisplay_Compound() {
+			$this->doContentModelTest_Compound('', '', '');
+		}
 
-    //############################################################
+		function TestContentModelDisplay_LargeImage() {
+			$this->doContentModelTest_LargeImage('mayamotuldesanjosearchaeology', 'motul', '372');
+		}
 
+		function TestContentModelDisplay_PDF() {
+			$this->doContentModelTest_PDF('mayamotuldesanjosearchaeology', 'motul', '519');
+		}
 
-    function TestObject_Collection_Artifacts() {
-        $this->get('http://'.TARGET_HOST.'/mayamotuldesanjosearchaeology/islandora/object/motul%253Amayaartifacts');
-        $this->standardResponseChecks();
-    }
+		function TestContentModelDisplay_Video() {
+			$this->doContentModelTest_Video('', '', '');
+		}
 
-    function TestObject_Specific_Artifact() {
-        $this->get('http://'.TARGET_HOST.'/mayamotuldesanjosearchaeology/islandora/object/motul%3A239');
-        $this->standardResponseChecks();
-    }
+		function Test_SolutionPacks_End() {
+			echo "</ul>";
+		}
 
-    function TestObject_Collection_Publications() {
-        $this->get('http://'.TARGET_HOST.'/mayamotuldesanjosearchaeology/islandora/object/motul%3Asitereports');
-        $this->standardResponseChecks();
-    }
+		#############################################################
+		# Test Collections and Objects (this site only)
+		#############################################################
 
-    function TestObject_Specific_Publication() {
-        $this->get('http://'.TARGET_HOST.'/mayamotuldesanjosearchaeology/islandora/object/motul%3A499');
-        $this->standardResponseChecks();
-    }
+		function TestAccessibility_Collection_And_Object() {
+			# array elements: ['collection_id', 'object_id']
+			$array_collection_and_object_ids = [
+				['islandora%3Aicgdemo', '']
+				, ['motul%253Amayaartifacts', 'motul%3A239']
+				, ['motul%3Asitereports', 'motul%3A434']
+				// , ['','']
+			];
 
-    function TestSearch_Operation() {
-        $this->get('http://'.TARGET_HOST.'/mayamotuldesanjosearchaeology/islandora/search?f[0]=mods_note_operation_ms%3A%2210%22');
-        $this->standardResponseChecks();
-    }
+			$this->doTestSite_Collections_and_Objects($array_collection_and_object_ids);
+		}
 
-    function TestSearch_Sort_Title() {
-        $this->get('http://'.TARGET_HOST.'/mayamotuldesanjosearchaeology/islandora/search/%20?sort=sort.title%20asc');
-        $this->standardResponseChecks();
-    }
+		#############################################################
+		# Test Search and Facets
+		#############################################################
 
-    function TestSearch_Facets() {
-        $this->get('http://'.TARGET_HOST.'/mayamotuldesanjosearchaeology/islandora/search/');
-        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Collection<\\/h3>/i');
-        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Resource Type<\\/h3>/i');
-        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Language<\\/h3>/i');
-        $this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Subject<\\/h3>/i');
-    }
+		function TestSearch_Operation() {
+			$this->get(FULL_APP_URL . '/mayamotuldesanjosearchaeology/islandora/search?f[0]=mods_note_operation_ms%3A%2210%22');
+			$this->standardResponseChecks();
+		}
 
-}
+		function TestSearch_Sort_Title() {
+			$this->get(FULL_APP_URL . '/mayamotuldesanjosearchaeology/islandora/search/%20?sort=sort.title%20asc');
+			$this->standardResponseChecks();
+		}
+
+		function TestSearch_Facets() {
+			$this->get(FULL_APP_URL . '/mayamotuldesanjosearchaeology/islandora/search');
+			$this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Collection<\\/h3>/i');
+			$this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Resource type<\\/h3>/i');
+			$this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Language<\\/h3>/i');
+			$this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Subject<\\/h3>/i');
+		}
+
+		#############################################################
+		# Utility Tool: Flush content to keep browser alive
+		#############################################################
+		function Test_Utility_KeepBrowserAlive() {
+			$this->util_KeepBrowserAlive_Flush(); // prevent browser timeout issues
+		}
+
+	}
