@@ -7,6 +7,7 @@
 ## INSTRUCTIONS
 This is a set of unit tests, based on the [Simpletest](http://simpletest.org/index.html) framework, for verifying functionality of an Islandora site or multiple sites.
 Instructions for use: 
+
 1. Copy the "institution.cfg.php.sample" file and rename it "institution.cfg.php"
 1. Update the default values within the "institution.cfg.php" configuration file
 1. From your laptop, navigate to the correct localhost path (i.e. http://localhost/icg_islandora_unit_tests/TestNarrowSuite.php) to run this set of unit test files against any live or local server. 
