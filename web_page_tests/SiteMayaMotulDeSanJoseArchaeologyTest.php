@@ -1,5 +1,5 @@
 <?php
-	require_once('Site_Common_Battery_Test.php');
+	require_once dirname(__FILE__) . '/Site_Common_Battery_Test.php';
 
 	class SiteMayaMotulDeSanJoseArchaeologyTest extends MultiSiteIslandoraWebTestCase {
 
@@ -74,8 +74,7 @@
 		function TestAccessibility_Collection_And_Object() {
 			# array elements: ['collection_id', 'object_id']
 			$array_collection_and_object_ids = [
-				['islandora%3Aicgdemo', '']
-				, ['motul%253Amayaartifacts', 'motul%3A239']
+				['motul%253Amayaartifacts', 'motul%3A239']
 				, ['motul%3Asitereports', 'motul%3A434']
 				// , ['','']
 			];

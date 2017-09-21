@@ -1,5 +1,5 @@
 <?php
-	require_once('Site_Common_Battery_Test.php');
+	require_once dirname(__FILE__) . '/Site_Common_Battery_Test.php';
 
 	class Site_Main_Test extends MultiSiteIslandoraWebTestCase {
 
@@ -23,15 +23,22 @@
 		}
 
 		function TestProjectLeads() {
-			$this->fail("IMPROVEMENT IDEA: Change path 'project-leads' to 'discover-collections'?"); // also change TestDiscoverCollections
-			$this->get(FULL_APP_URL . '/project-leads');
+			$this->get(FULL_APP_URL . '/discover-collections');
+			$this->standardResponseChecks();
+		}
+
+		function TestAbout() {
+			$this->get(FULL_APP_URL . '/about');
 			$this->standardResponseChecks();
 		}
 
 		function TestFAQ() {
-			$this->fail("IMPROVEMENT IDEA: Change path '/node/6' to '/faq'?");
-			$this->get(FULL_APP_URL . '/node/6');
+			$this->get(FULL_APP_URL . '/faq');
 			$this->standardResponseChecks();
+		}
+
+		function TestCountFedoraObjects() {
+			$this->fail("IMPROVEMENT IDEA: Add a Sparql query to count and report the number of fedora objects as found in the Fedora Resource Index");
 		}
 
 		#############################################################
@@ -96,7 +103,6 @@
 				, ['costumearchives%3Aimages', 'costumearchives%3A28']
 				, ['daviscenter%3Avideos', 'daviscenter%3A67']
 				, ['daviscenter%3Aposters', 'daviscenter%3A30']
-				, ['davislectureseriesimages%3Aimages', '']
 				, ['dively%3Aposters', 'dively%3Aposters']
 				, ['dwight%3Apapers', 'dwight%3A32']
 				, ['ephraim%3Apipetongs', '']
@@ -105,7 +111,6 @@
 				, ['foundingdocuments%3Aimages', 'foundingdocuments%3A1']
 				, ['holley%3Apapers', 'holley%3A17']
 				, ['hopkinsforestmaps%3Aimages', 'hopkinsforestmaps%3A241']
-				, ['islandora%3Aicgdemo', '']
 				, ['lavaka%3Aimages', 'lavaka%3A64']
 				, ['maps%3Awilliamstown', 'maps%3A14']
 				, ['oralhistoryproject%3Aabstracts', 'oralhistoryproject%3A1']
@@ -139,11 +144,8 @@
 			//$this->get(FULL_APP_URL . '/islandora/search/%20?islandora_solr_search_navigation=0'); // hack to return smaller resultset to avoid timeout
 			$this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Collection<\\/h3>/i');
 			$this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Name<\\/h3>/i');
-			$this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Department or Group<\\/h3>/i');
 			$this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Type<\\/h3>/i');
-			$this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Subject<\\/h3>/i');
-			$this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Geographic<\\/h3>/i');
-			$this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Language<\\/h3>/i');
+			$this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Department<\\/h3>/i');
 		}
 
 		#############################################################

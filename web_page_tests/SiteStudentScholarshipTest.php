@@ -1,11 +1,11 @@
 <?php
 	require_once dirname(__FILE__) . '/Site_Common_Battery_Test.php';
 
-	class SiteThesesTest extends MultiSiteIslandoraWebTestCase {
+	class SiteStudentScholarshipTest extends MultiSiteIslandoraWebTestCase {
 
-		function SiteThesesTest() {
+		function SiteStudentScholarshipTest() {
 			# Set site name
-			$this->setMultiSite('theses');
+			$this->setMultiSite('students');
 			echo "<p></p><hr><h3>TESTING: " . $this->getTestingUrlBase() . "</h3>";
 		}
 
@@ -18,7 +18,7 @@
 		}
 
 		function TestArticlesPage() {
-			$this->get(FULL_APP_URL . '/theses/node/20');
+			$this->get(FULL_APP_URL . '/students/node/20');
 			$this->fail("IMPROVEMENT IDEA: Change 'node/20' to a more pleasant relative link");
 			$this->standardResponseChecks();
 		}
@@ -57,7 +57,7 @@
 		}
 
 		function TestContentModelDisplay_PDF() {
-			$this->doContentModelTest_PDF('theses', 'studenttheses', '10');
+			$this->doContentModelTest_PDF('students', 'studenttheses', '10');
 		}
 
 		function TestContentModelDisplay_Video() {
@@ -89,31 +89,29 @@
 		private $specificTestObjectUrl = '';
 
 		function TestObjectDisplayCollectionInfo() {
-			$this->specificTestObjectUrl = FULL_APP_URL . '/theses/islandora/object/studenttheses%3A10';
+			$this->specificTestObjectUrl = FULL_APP_URL . '/students/islandora/object/studenttheses%3A10';
 			$this->get($this->specificTestObjectUrl);
 
 			$this->assertPattern('/<div class="collection-info">/i');
 			$this->assertPattern('/>IN COLLECTIONS</i');
-			$this->assertPattern('/<a href="\\/theses\\/islandora\\/object\\/studenttheses%3Aobject">Theses<\\/a>/i');
+			$this->assertPattern('/<a href="\\/students\\/islandora\\/object\\/studenttheses%3Aobject">Theses<\\/a>/i');
 		}
 
 		function TestObjectDisplayMetadataLabels() {
 			$this->get($this->specificTestObjectUrl);
 
-			$this->assertPattern('/<tr class="type-of-resource">\s*<td class="mods_label">TYPE OF RESOURCE<\\/td>\s*<td class="mods_value">text<\\/td>\s*<\\/tr>/i');
 			$this->assertPattern('/<tr class="identifier">\s*<td class="mods_label">FILENAME<\\/td>\s*<td class="mods_value">2016_January_Alvarez_Kyung_Thesis_Final_POEC.pdf<\\/td>\s*<\\/tr>/i');
-			# $this->assertPattern('/<tr class="rights">\s*<td class="mods_label">RIGHTS<\\/td>\s*<td class="mods_value">Contact Archives and Special Collections at <\\/td>\s*<\\/tr>/i');
-			$this->assertPattern('/<tr class="creator author">\s*<td class="mods_label">AUTHOR<\\/td>\s*<td class="mods_value">Alvarez, Kyung Nahiomy<\\/td>\s*<\\/tr>/i');
-			$this->assertPattern('/<tr class="creator advisor">\s*<td class="mods_label">ADVISOR<\\/td>\s*<td class="mods_value">Mahon, James E.<\\/td>\s*<\\/tr>/i');
+			$this->assertPattern('/<tr class="rights">\s*<td class="mods_label">rights<\\/td>\s*<td class="mods_value">Contact Archives and Special Collections at<\\/td>\s*<\\/tr>/i');
+			$this->assertPattern('/<tr class="creator author">\s*<td class="mods_label">author<\\/td>\s*<td class="mods_value">Alvarez, Kyung Nahiomy<\\/td>\s*<\\/tr>/i');
+			$this->assertPattern('/<tr class="creator advisor">\s*<td class="mods_label">ADVISOR<\\/td>\s*<td class="mods_value">Mahon, James E., 1955-<\\/td>\s*<\\/tr>/i');
 			$this->assertPattern('/<tr class="creator advisor">\s*<td class="mods_label">ADVISOR<\\/td>\s*<td class="mods_value">LaLumia, Sara<\\/td>\s*<\\/tr>/i');
-			$this->assertPattern('/<tr class="department">\s*<td class="mods_label">DEPARTMENT<\\/td>\s*<td class="mods_value">Political Economy<\\/td>\s*<\\/tr>/i');
+			$this->assertPattern('/<tr class="department">\s*<td class="mods_label">department<\\/td>\s*<td class="mods_value">Political Economy<\\/td>\s*<\\/tr>/i');
 			$this->assertPattern('/<tr class="genre">\s*<td class="mods_label">GENRE<\\/td>\s*<td class="mods_value">Thesis<\\/td>\s*<\\/tr>/i');
-			$this->assertPattern('/<tr class="date-issued">\s*<td class="mods_label">DATE ISSUED<\\/td>\s*<td class="mods_value">2016<\\/td>\s*<\\/tr>/i');
-			$this->assertPattern('/<tr class="note provenance">\s*<td class="mods_label">PROVENANCE<\\/td>\s*<td class="mods_value">Submitted by author<\\/td>\s*<\\/tr>/i');
-			$this->assertPattern('/<tr class="subject">\s*<td class="mods_label">SUBJECT<\\/td>\s*<td class="mods_value">Credit cards -- Marketing<\\/td>\s*<\\/tr>/i');
-			$this->assertPattern('/<tr class="identifier">\s*<td class="mods_label">CALLNUMBER<\\/td>\s*<td class="mods_value">541.A48 2016<\\/td>\s*<\\/tr>/i');
-			$this->assertPattern('/<tr class="creator repository">\s*<td class="mods_label">REPOSITORY<\\/td>\s*<td class="mods_value">Williams College Archives<\\/td>\s*<\\/tr>/i');
+			$this->assertPattern('/<tr class="date-issued">\s*<td class="mods_label">date issued<\\/td>\s*<td class="mods_value">2016<\\/td>\s*<\\/tr>/i');
+			$this->assertPattern('/<tr class="note provenance">\s*<td class="mods_label">provenance<\\/td>\s*<td class="mods_value">Submitted by author<\\/td>\s*<\\/tr>/i');
+			$this->assertPattern('/<tr class="subject">\s*<td class="mods_label">subject<\\/td>\s*<td class="mods_value">Credit cards -- Marketing<\\/td>\s*<\\/tr>/i');
 			$this->assertPattern('/<tr class="geographic">\s*<td class="mods_label">GEOGRAPHIC<\\/td>\s*<td class="mods_value">United States<\\/td>\s*<\\/tr>/i');
+			$this->assertPattern('/<tr class="identifier">\s*<td class="mods_label">CALLNUMBER<\\/td>\s*<td class="mods_value">541.A48 2016<\\/td>\s*<\\/tr>/i');
 		}
 
 		function TestObjectDisplayDatastreamsSection() {
@@ -122,13 +120,13 @@
 			$this->assertPattern('/<table class="object-datastreams">/i');
 
 			$this->assertPattern('/<td class="id">OBJ<\\/td>/i');
-			$this->assertPattern('/<a href="\\/theses\\/islandora\\/object\\/studenttheses%3A10\\/datastream\\/OBJ\\/download">2016_January_Alvarez_Kyung_Thesis_Final_POEC.pdf<\\/a>/i');
+			$this->assertPattern('/<a href="\\/students\\/islandora\\/object\\/studenttheses%3A10\\/datastream\\/OBJ\\/download">2016_January_Alvarez_Kyung_Thesis_Final_POEC.pdf<\\/a>/i');
 
 			$this->assertPattern('/<td class="id">FULL_TEXT<\\/td>/i');
-			$this->assertPattern('/<a href="\\/theses\\/islandora\\/object\\/studenttheses%3A10\\/datastream\\/FULL_TEXT\\/download">2016_January_Alvarez_Kyung_Thesis_POEC_text.txt<\\/a>/i');
+			$this->assertPattern('/<a href="\\/students\\/islandora\\/object\\/studenttheses%3A10\\/datastream\\/FULL_TEXT\\/download">2016_January_Alvarez_Kyung_Thesis_POEC_text.txt<\\/a>/i');
 
 			$this->assertPattern('/<td class="id">TN<\\/td>/i');
-			$this->assertPattern('/<a href="\\/theses\\/islandora\\/object\\/studenttheses%3A10\\/datastream\\/TN\\/download">TN<\\/a>/i');
+			$this->assertPattern('/<a href="\\/students\\/islandora\\/object\\/studenttheses%3A10\\/datastream\\/TN\\/download">TN<\\/a>/i');
 		}
 
 		#############################################################
@@ -136,17 +134,17 @@
 		#############################################################
 
 		function TestSearch_Author() {
-			$this->get(FULL_APP_URL . '/theses/islandora/search?f[0]=mods_name_personal_namePart_ms%3A%22LaLumia%2C%5C%20Sara%22');
+			$this->get(FULL_APP_URL . '/students/islandora/search?f[0]=mods_name_personal_namePart_ms%3A%22LaLumia%2C%5C%20Sara%22');
 			$this->standardResponseChecks();
 		}
 
 		function TestSearch_SortTitle() {
-			$this->get(FULL_APP_URL . '/theses/islandora/search/%20?sort=sort.title%20asc');
+			$this->get(FULL_APP_URL . '/students/islandora/search/%20?sort=sort.title%20asc');
 			$this->standardResponseChecks();
 		}
 
 		function TestSearch_Facets() {
-			$this->get(FULL_APP_URL . '/theses/islandora/search');
+			$this->get(FULL_APP_URL . '/students/islandora/search');
 
 			$this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Department<\\/h3>/i');
 			$this->assertPattern('/<div class="islandora-solr-facet-wrapper"><h3>Year<\\/h3>/i');

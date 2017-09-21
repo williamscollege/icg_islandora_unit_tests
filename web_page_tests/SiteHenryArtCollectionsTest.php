@@ -1,5 +1,5 @@
 <?php
-	require_once('Site_Common_Battery_Test.php');
+	require_once dirname(__FILE__) . '/Site_Common_Battery_Test.php';
 
 	class SiteHenryArtCollectionsTest extends MultiSiteIslandoraWebTestCase {
 
@@ -75,7 +75,6 @@
 			# array elements: ['collection_id', 'object_id']
 			$array_collection_and_object_ids = [
 				['hopkinsforestmaps%3Aimages', 'hopkinsforestmaps%3A241']
-				, ['islandora%3Aicgdemo', '']
 				, ['rosenburgarchives%3Aimages', 'rosenburgarchives%3A121']
 				// , ['','']
 			];

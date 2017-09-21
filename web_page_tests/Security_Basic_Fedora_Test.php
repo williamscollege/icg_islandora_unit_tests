@@ -1,6 +1,5 @@
 <?php
-	require_once dirname(__FILE__) . '/../institution.cfg.php';
-	require_once dirname(__FILE__) . '/../simpletest/web_tester_islandora.php';
+	require_once dirname(__FILE__) . '/Site_Common_Battery_Test.php';
 
 	class BasicFedoraSecurityTest extends IslandoraWebTestCase {
 
@@ -61,7 +60,14 @@
 		# Utility Tool: Flush content to keep browser alive
 		#############################################################
 		function Test_Utility_KeepBrowserAlive() {
-			$this->util_KeepBrowserAlive_Flush(); // prevent browser timeout issues
-		}
+			// $this->util_KeepBrowserAlive_Flush(); // prevent browser timeout issues
+
+			// workaround for inability to access above fxn, is below:
+			ob_flush(); // flush (send) the output buffer; to flush the ob output buffers, you will have to call both ob_flush() and flush()
+			flush(); // flush system output buffer; to flush the ob output buffers, you will have to call both ob_flush() and flush()
+			set_time_limit(0); // restarts the timeout counter from zero
+			// echo 'fxn: flushed content to browser.<br />';
+			// ob_end_flush();
+			}
 
 	}

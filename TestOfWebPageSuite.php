@@ -22,6 +22,7 @@
 			$this->addFile('web_page_tests/SiteHenryArtCollectionsTest.php');
 			$this->addFile('web_page_tests/SiteMayaMotulDeSanJoseArchaeologyTest.php');
 			$this->addFile('web_page_tests/SiteRonadhCoxTest.php');
+			$this->addFile('web_page_tests/SiteStudentScholarshipTest.php');
 			$this->addFile('web_page_tests/SiteThesesTest.php');
 			$this->addFile('web_page_tests/SiteWilliamsArchivesTest.php');
 			$this->addFile('web_page_tests/Site_Common_Battery_Test.php');

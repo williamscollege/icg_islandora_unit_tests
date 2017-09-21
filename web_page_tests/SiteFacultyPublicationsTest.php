@@ -1,5 +1,5 @@
 <?php
-	require_once('Site_Common_Battery_Test.php');
+	require_once dirname(__FILE__) . '/Site_Common_Battery_Test.php';
 
 	class SiteFacultyPublicationsTest extends MultiSiteIslandoraWebTestCase {
 
@@ -15,7 +15,6 @@
 
 		function TestSiteBasics() {
 			$this->doStandardBasicSiteTests();
-			$this->fail("IMPROVEMENT IDEA: Change the hardcoded drupal 'Unbound' link for all sites (templatesite too) to be HTTPS?");
 		}
 
 		function TestArticlesPage() {
@@ -75,8 +74,7 @@
 		function TestAccessibility_Collection_And_Object() {
 			# array elements: ['collection_id', 'object_id']
 			$array_collection_and_object_ids = [
-				['facultyarticles%3Atext', 'facultyarticles%3A133']
-				, ['islandora%3Aicgdemo', '']
+				['facultyarticles%3Atext', 'facultyarticles%3A138']
 				// , ['','']
 			];
 
@@ -121,13 +119,13 @@
 
 			$this->assertPattern('/<table class="object-datastreams">/i');
 
-			$this->assertPattern('/<td>OBJ<\\/td>/i');
+			$this->assertPattern('/<td class="id">OBJ<\\/td>/i');
 			$this->assertPattern('/<a href="\\/facultypublications\\/islandora\\/object\\/facultyarticles%3A138\\/datastream\\/OBJ\\/download">maroja_bmc_evol_bio_2014.pdf<\\/a>/i');
 
-			$this->assertPattern('/<td>FULL_TEXT<\\/td>/i');
+			$this->assertPattern('/<td class="id">FULL_TEXT<\\/td>/i');
 			$this->assertPattern('/<a href="\\/facultypublications\\/islandora\\/object\\/facultyarticles%3A138\\/datastream\\/FULL_TEXT\\/download">maroja_bmc_evol_bio_2014.txt<\\/a>/i');
 
-			$this->assertPattern('/<td>TN<\\/td>/i');
+			$this->assertPattern('/<td class="id">TN<\\/td>/i');
 			$this->assertPattern('/<a href="\\/facultypublications\\/islandora\\/object\\/facultyarticles%3A138\\/datastream\\/TN\\/download">TN<\\/a>/i');
 		}
 
